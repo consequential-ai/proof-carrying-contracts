@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.880
+Proof Carrying Contracts is a research
+project developing verifiable
+
+2
+00:00:03.880 --> 00:00:06.520
+commitments for the economy of AI agents.
+
+3
+00:00:07.600 --> 00:00:11.380
+Agents working for different people and
+organisations need to rely on each
+
+4
+00:00:11.380 --> 00:00:11.960
+other.
+
+5
+00:00:12.460 --> 00:00:17.180
+Yet an agent’s promise, expressed in
+natural language, does not by itself
+
+6
+00:00:17.180 --> 00:00:19.240
+constrain what it actually does.
+
+7
+00:00:20.160 --> 00:00:24.200
+Our proposal is to make those agreements
+enforceable while the agent works.
+
+8
+00:00:25.420 --> 00:00:29.320
+Imagine an AI agent asking another to
+carry out a task.
+
+9
+00:00:30.160 --> 00:00:33.860
+They agree on what must be done, the rules
+to follow, and payment.
+
+10
+00:00:34.760 --> 00:00:38.720
+The contract expresses these conditions in
+terms software can check.
+
+11
+00:00:39.640 --> 00:00:42.220
+Both agents sign, and payment is set
+aside.
+
+12
+00:00:43.380 --> 00:00:47.840
+The agent doing the work runs inside the
+Airlock: an isolated environment
+
+13
+00:00:47.840 --> 00:00:51.220
+through which it must access external
+tools and resources.
+
+14
+00:00:52.320 --> 00:00:55.040
+Before each tool call, it provides a
+proof:
+
+15
+00:00:55.580 --> 00:01:00.080
+a structured argument whose steps a
+computer can check, establishing that the
+
+16
+00:01:00.080 --> 00:01:03.140
+action’s possible effects respect the
+contract.
+
+17
+00:01:04.180 --> 00:01:08.620
+The check follows precise rules and
+accounts for earlier actions, including
+
+18
+00:01:08.620 --> 00:01:10.480
+resources already used.
+
+19
+00:01:11.620 --> 00:01:15.060
+If that proof is rejected, the Airlock
+blocks the call.
+
+20
+00:01:15.680 --> 00:01:18.580
+The agent can revise its proposal and try
+again.
+
+21
+00:01:19.420 --> 00:01:22.460
+Once a proof is accepted, the tool call
+proceeds.
+
+22
+00:01:23.420 --> 00:01:27.920
+Sending an email or accessing a database
+each requires its own check,
+
+23
+00:01:28.320 --> 00:01:29.740
+and the results are recorded.
+
+24
+00:01:30.960 --> 00:01:35.420
+Finally, the agent uses those records to
+prove that the agreed task is
+
+25
+00:01:35.420 --> 00:01:36.000
+complete.
+
+26
+00:01:36.960 --> 00:01:38.980
+The Airlock checks this final proof,
+
+27
+00:01:39.540 --> 00:01:41.480
+then releases the agreed payment.
+
+28
+00:01:42.620 --> 00:01:46.420
+We’re working towards an economy where
+agents can build on each other’s work,
+
+29
+00:01:46.420 --> 00:01:48.826
+through commitments they can rely on.

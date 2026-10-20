@@ -1,0 +1,206 @@
+{
+  "width": 1536,
+  "height": 1152,
+  "fps": 24,
+  "fadeFrames": 13,
+  "audio": "pc2-overview.mp3",
+  "duration": 110.33333333333333,
+  "states": [
+    {
+      "id": "intro",
+      "start": 0,
+      "title": "Proof Carrying Contracts",
+      "detail": "Verifiable commitments for the economy of AI agents.",
+      "end": 7.125
+    },
+    {
+      "id": "problem",
+      "start": 7.125,
+      "title": "A promise alone does not constrain an agent’s actions",
+      "detail": "A commitment needs to govern what happens during execution.",
+      "end": 19.916666666666668
+    },
+    {
+      "id": "proposal",
+      "start": 19.916666666666668,
+      "title": "From agreement to enforceable commitments",
+      "detail": "PC2 connects the agreed conditions to control over execution.",
+      "end": 25.25
+    },
+    {
+      "id": "agreement",
+      "start": 25.25,
+      "title": "An agent commissions another for a task",
+      "detail": "The parties agree on what must be done, the rules to follow, and payment.",
+      "end": 30
+    },
+    {
+      "id": "terms",
+      "start": 30,
+      "title": "Agreeing on the task, constraints and payment",
+      "detail": "Both agents establish the conditions that will govern the work.",
+      "end": 34.5
+    },
+    {
+      "id": "formal",
+      "start": 34.5,
+      "title": "Conditions that software can check",
+      "detail": "The agreement expresses the task and its constraints in precise terms.",
+      "end": 39.5
+    },
+    {
+      "id": "first-signature",
+      "start": 39.5,
+      "title": "Both agents sign the contract",
+      "detail": "Both parties sign the same agreement.",
+      "end": 40.25
+    },
+    {
+      "id": "signed",
+      "start": 40.25,
+      "title": "Agreement signed · Payment set aside",
+      "detail": "Execution can now begin under the agreed contract.",
+      "end": 43.083333333333336
+    },
+    {
+      "id": "inside",
+      "start": 43.083333333333336,
+      "title": "The executing agent runs inside the Airlock",
+      "detail": "Access to external tools and resources passes through the Airlock.",
+      "end": 52.083333333333336
+    },
+    {
+      "id": "proof",
+      "start": 52.083333333333336,
+      "title": "Every proposed action carries a proof",
+      "detail": "A structured argument whose steps can be checked against precise rules.",
+      "end": 64
+    },
+    {
+      "id": "history",
+      "start": 64,
+      "title": "Proofs account for the current state",
+      "detail": "The check includes earlier actions and resources already used.",
+      "end": 71.41666666666667
+    },
+    {
+      "id": "rejected",
+      "start": 71.41666666666667,
+      "title": "Proof rejected · Action blocked",
+      "detail": "The external tool is not called.",
+      "end": 75.41666666666667
+    },
+    {
+      "id": "revised",
+      "start": 75.41666666666667,
+      "title": "The agent revises its proposal",
+      "detail": "A revised action and its proof are submitted for checking.",
+      "end": 80.16666666666667
+    },
+    {
+      "id": "email",
+      "start": 80.16666666666667,
+      "title": "Proof accepted · Email tool called",
+      "detail": "The permitted call executes and its result is recorded.",
+      "end": 84.5
+    },
+    {
+      "id": "database-proposal",
+      "start": 84.5,
+      "title": "The next tool call also needs a proof",
+      "detail": "Database access requires its own proof check.",
+      "end": 86.20833333333333
+    },
+    {
+      "id": "database",
+      "start": 86.20833333333333,
+      "title": "Proof accepted · Database tool called",
+      "detail": "A second permitted action executes inside the same agreement.",
+      "end": 88
+    },
+    {
+      "id": "records",
+      "start": 88,
+      "title": "The results are recorded",
+      "detail": "The execution record supports the final proof of completion.",
+      "end": 90.75
+    },
+    {
+      "id": "settlement",
+      "start": 90.75,
+      "title": "The agent submits a proof of completion",
+      "detail": "The settlement call uses the execution record to establish the agreed goal.",
+      "end": 96.75
+    },
+    {
+      "id": "checking",
+      "start": 96.75,
+      "title": "Checking the proof of completion",
+      "detail": "The final proof is checked against the signed contract.",
+      "end": 98.875
+    },
+    {
+      "id": "completion",
+      "start": 98.875,
+      "title": "Completion verified",
+      "detail": "The agreed completion conditions have been established.",
+      "end": 99.625
+    },
+    {
+      "id": "paid",
+      "start": 99.625,
+      "title": "The Airlock releases the agreed payment",
+      "detail": "Payment is released to the contractor after completion is verified.",
+      "end": 102.375
+    },
+    {
+      "id": "cooperation",
+      "start": 102.375,
+      "title": "A foundation for cooperation between agents",
+      "detail": "An economy where agents can build on each other’s work through dependable commitments.",
+      "end": 110.33333333333333
+    }
+  ],
+  "chapters": [
+    {
+      "label": "Introduction",
+      "start": 0
+    },
+    {
+      "label": "Agreement",
+      "start": 25.25
+    },
+    {
+      "label": "Airlock",
+      "start": 43.083333333333336
+    },
+    {
+      "label": "Proofs",
+      "start": 52.083333333333336
+    },
+    {
+      "label": "Blocked",
+      "start": 71.41666666666667
+    },
+    {
+      "label": "Email",
+      "start": 80.16666666666667
+    },
+    {
+      "label": "Database",
+      "start": 84.5
+    },
+    {
+      "label": "Completion",
+      "start": 90.75
+    },
+    {
+      "label": "Payment",
+      "start": 99.625
+    },
+    {
+      "label": "Cooperation",
+      "start": 102.375
+    }
+  ]
+}

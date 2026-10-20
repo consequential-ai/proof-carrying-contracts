@@ -1,0 +1,151 @@
+{
+  "source": "components-original.png",
+  "source_dimensions": [
+    1254,
+    1254
+  ],
+  "cell_dimensions": [
+    418,
+    418
+  ],
+  "processing": "Exact equal 3\u00d73 cell crops only; no resizing, masking, recoloring or raster redraw. WebP quality=88, method=6.",
+  "assets": [
+    {
+      "name": "client",
+      "box": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "width": 418,
+      "height": 418,
+      "png": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/client.png",
+      "png_bytes": 170359,
+      "webp": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/client.webp",
+      "webp_bytes": 12876
+    },
+    {
+      "name": "contractor",
+      "box": [
+        418,
+        0,
+        836,
+        418
+      ],
+      "width": 418,
+      "height": 418,
+      "png": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/contractor.png",
+      "png_bytes": 168493,
+      "webp": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/contractor.webp",
+      "webp_bytes": 13272
+    },
+    {
+      "name": "specialist",
+      "box": [
+        836,
+        0,
+        1254,
+        418
+      ],
+      "width": 418,
+      "height": 418,
+      "png": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/specialist.png",
+      "png_bytes": 170965,
+      "webp": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/specialist.webp",
+      "webp_bytes": 12894
+    },
+    {
+      "name": "contract",
+      "box": [
+        0,
+        418,
+        418,
+        836
+      ],
+      "width": 418,
+      "height": 418,
+      "png": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/contract.png",
+      "png_bytes": 171968,
+      "webp": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/contract.webp",
+      "webp_bytes": 11350
+    },
+    {
+      "name": "subcontract",
+      "box": [
+        418,
+        418,
+        836,
+        836
+      ],
+      "width": 418,
+      "height": 418,
+      "png": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/subcontract.png",
+      "png_bytes": 131852,
+      "webp": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/subcontract.webp",
+      "webp_bytes": 6862
+    },
+    {
+      "name": "action-proof",
+      "box": [
+        836,
+        418,
+        1254,
+        836
+      ],
+      "width": 418,
+      "height": 418,
+      "png": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/action-proof.png",
+      "png_bytes": 195412,
+      "webp": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/action-proof.webp",
+      "webp_bytes": 16082
+    },
+    {
+      "name": "tool",
+      "box": [
+        0,
+        836,
+        418,
+        1254
+      ],
+      "width": 418,
+      "height": 418,
+      "png": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/tool.png",
+      "png_bytes": 151920,
+      "webp": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/tool.webp",
+      "webp_bytes": 10076
+    },
+    {
+      "name": "airlock",
+      "box": [
+        418,
+        836,
+        836,
+        1254
+      ],
+      "width": 418,
+      "height": 418,
+      "png": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/airlock.png",
+      "png_bytes": 198215,
+      "webp": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/airlock.webp",
+      "webp_bytes": 18234
+    },
+    {
+      "name": "record",
+      "box": [
+        836,
+        836,
+        1254,
+        1254
+      ],
+      "width": 418,
+      "height": 418,
+      "png": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/record.png",
+      "png_bytes": 172434,
+      "webp": "/Users/cciliber/Dev/PC2/PC2-website/outputs/v2-art/record.webp",
+      "webp_bytes": 15306
+    }
+  ],
+  "source_png_bytes": 1618330,
+  "source_webp_bytes": 117424
+}

@@ -1,0 +1,407 @@
+[
+  {
+    "role": "E1",
+    "before": "learning-based agents",
+    "after": "agents using learning methods"
+  },
+  {
+    "role": "E1",
+    "before": "environment-specific adapters",
+    "after": "adapters for individual environments"
+  },
+  {
+    "role": "E1",
+    "before": "formal-methods and empirical researchers",
+    "after": "researchers in formal methods and empirical research"
+  },
+  {
+    "role": "E1",
+    "before": "proof-gated behaviour",
+    "after": "behaviour governed by proof checks"
+  },
+  {
+    "role": "E1",
+    "before": "hands-on software",
+    "after": "practical software"
+  },
+  {
+    "role": "E1",
+    "before": "proof-checking interfaces",
+    "after": "interfaces for proof checking"
+  },
+  {
+    "role": "E1",
+    "before": "open-source project",
+    "after": "open source project"
+  },
+  {
+    "role": "E1",
+    "before": "co-lead technical contributions",
+    "after": "jointly lead technical contributions"
+  },
+  {
+    "role": "E1",
+    "before": "non-public work",
+    "after": "work that cannot be shared publicly"
+  },
+  {
+    "role": "E2",
+    "before": "model-development agenda",
+    "after": "model development agenda"
+  },
+  {
+    "role": "E2",
+    "before": "hands-on training",
+    "after": "practical training"
+  },
+  {
+    "role": "E2",
+    "before": "formal-methods specialists",
+    "after": "specialists in formal methods"
+  },
+  {
+    "role": "E2",
+    "before": "fine-tuning",
+    "after": "fine tuning"
+  },
+  {
+    "role": "E2",
+    "before": "problem-solving processes",
+    "after": "processes for solving problems"
+  },
+  {
+    "role": "E2",
+    "before": "held-out tests",
+    "after": "held out tests"
+  },
+  {
+    "role": "E2",
+    "before": "post-training",
+    "after": "post training"
+  },
+  {
+    "role": "E2",
+    "before": "hands-on experience",
+    "after": "practical experience"
+  },
+  {
+    "role": "E2",
+    "before": "machine-learning models",
+    "after": "machine learning models"
+  },
+  {
+    "role": "E2",
+    "before": "fine-tuning",
+    "after": "fine tuning"
+  },
+  {
+    "role": "E2",
+    "before": "post-training",
+    "after": "post training"
+  },
+  {
+    "role": "E2",
+    "before": "model-development project",
+    "after": "model development project"
+  },
+  {
+    "role": "E2",
+    "before": "fine-tuning",
+    "after": "fine tuning"
+  },
+  {
+    "role": "E2",
+    "before": "model-development results",
+    "after": "model development results"
+  },
+  {
+    "role": "E2",
+    "before": "non-public work",
+    "after": "work that cannot be shared publicly"
+  },
+  {
+    "role": "R1-P",
+    "before": "implementation-oriented researchers",
+    "after": "researchers focused on implementation"
+  },
+  {
+    "role": "R1-P",
+    "before": "payment-like operations",
+    "after": "operations such as payments"
+  },
+  {
+    "role": "R1-P",
+    "before": "tool-semantics question",
+    "after": "question about tool semantics"
+  },
+  {
+    "role": "R1-P",
+    "before": "programming-language semantics",
+    "after": "programming language semantics"
+  },
+  {
+    "role": "R1-P",
+    "before": "resource-sensitive reasoning",
+    "after": "reasoning about resource constraints"
+  },
+  {
+    "role": "R1-P",
+    "before": "proof-assistant environment",
+    "after": "proof assistant environment"
+  },
+  {
+    "role": "R1-P",
+    "before": "non-public work",
+    "after": "work that cannot be shared publicly"
+  },
+  {
+    "role": "R1-B",
+    "before": "implementation-oriented researchers",
+    "after": "researchers focused on implementation"
+  },
+  {
+    "role": "R1-B",
+    "before": "payment-like operations",
+    "after": "operations such as payments"
+  },
+  {
+    "role": "R1-B",
+    "before": "tool-semantics question",
+    "after": "question about tool semantics"
+  },
+  {
+    "role": "R1-B",
+    "before": "programming-language semantics",
+    "after": "programming language semantics"
+  },
+  {
+    "role": "R1-B",
+    "before": "resource-sensitive reasoning",
+    "after": "reasoning about resource constraints"
+  },
+  {
+    "role": "R1-B",
+    "before": "proof-assistant environment",
+    "after": "proof assistant environment"
+  },
+  {
+    "role": "R1-B",
+    "before": "non-public work",
+    "after": "work that cannot be shared publicly"
+  },
+  {
+    "role": "R2",
+    "before": "learning-based specification",
+    "after": "specification using learning methods"
+  },
+  {
+    "role": "R2",
+    "before": "formal-methods research",
+    "after": "research in formal methods"
+  },
+  {
+    "role": "R2",
+    "before": "learning-based systems",
+    "after": "systems using learning methods"
+  },
+  {
+    "role": "R2",
+    "before": "example- and counterexample-guided synthesis",
+    "after": "synthesis guided by examples and counterexamples"
+  },
+  {
+    "role": "R2",
+    "before": "held-out cases",
+    "after": "held out cases"
+  },
+  {
+    "role": "R2",
+    "before": "large-scale model training",
+    "after": "training large models"
+  },
+  {
+    "role": "R2",
+    "before": "implementation-oriented profiles",
+    "after": "profiles focused on implementation"
+  },
+  {
+    "role": "R2",
+    "before": "Counterexample-guided methods",
+    "after": "Methods guided by counterexamples"
+  },
+  {
+    "role": "R2",
+    "before": "research-software experience",
+    "after": "research software experience"
+  },
+  {
+    "role": "R2",
+    "before": "non-public work",
+    "after": "work that cannot be shared publicly"
+  },
+  {
+    "role": "R3",
+    "before": "The research aims to understand the relationship between learning, planning and verification: can agents use formal feedback to perform more useful work, rather than simply avoid actions that might fail a check?",
+    "after": "The research examines how learning, planning and verification affect useful task completion, compliance with the agreed constraints and responses to failed proof attempts."
+  },
+  {
+    "role": "R3",
+    "before": "proof-generating agents",
+    "after": "agents that generate proofs"
+  },
+  {
+    "role": "R3",
+    "before": "policy-aware planning",
+    "after": "planning that accounts for policies"
+  },
+  {
+    "role": "R3",
+    "before": "formal-methods and systems researchers",
+    "after": "researchers in formal methods and systems"
+  },
+  {
+    "role": "R3",
+    "before": "held-out cases",
+    "after": "held out cases"
+  },
+  {
+    "role": "R3",
+    "before": "formal-methods and systems researchers",
+    "after": "researchers in formal methods and systems"
+  },
+  {
+    "role": "R3",
+    "before": "proof-generating agents",
+    "after": "agents that generate proofs"
+  },
+  {
+    "role": "R3",
+    "before": "Policy-aware planning",
+    "after": "Planning that accounts for policies"
+  },
+  {
+    "role": "R3",
+    "before": ", proof assistants or specification-based testing; these are useful additions rather than prerequisites.",
+    "after": ", proof assistants or testing based on specifications are welcome additional areas of experience."
+  },
+  {
+    "role": "R3",
+    "before": "cross-lab collaboration",
+    "after": "collaboration across laboratories"
+  },
+  {
+    "role": "R3",
+    "before": "non-public work",
+    "after": "work that cannot be shared publicly"
+  },
+  {
+    "role": "R4",
+    "before": "multi-agent",
+    "after": "multiagent"
+  },
+  {
+    "role": "R4",
+    "before": "system-level outcomes",
+    "after": "outcomes across the system"
+  },
+  {
+    "role": "R4",
+    "before": "learning-based approaches",
+    "after": "approaches based on learning"
+  },
+  {
+    "role": "R4",
+    "before": "multi-agent",
+    "after": "multiagent"
+  },
+  {
+    "role": "R4",
+    "before": "multi-agent",
+    "after": "multiagent"
+  },
+  {
+    "role": "R4",
+    "before": "principal-level constraints",
+    "after": "constraints associated with each principal"
+  },
+  {
+    "role": "R4",
+    "before": "multi-agent",
+    "after": "multiagent"
+  },
+  {
+    "role": "R4",
+    "before": "experimental-design skills",
+    "after": "skills in experimental design"
+  },
+  {
+    "role": "R4",
+    "before": "interaction-level question",
+    "after": "question about interactions between agents"
+  },
+  {
+    "role": "R4",
+    "before": "system-level outcomes",
+    "after": "outcomes across the system"
+  },
+  {
+    "role": "R4",
+    "before": "Multi-agent",
+    "after": "Multiagent"
+  },
+  {
+    "role": "R4",
+    "before": "multi-agent",
+    "after": "multiagent"
+  },
+  {
+    "role": "R4",
+    "before": "non-public work",
+    "after": "work that cannot be shared publicly"
+  },
+  {
+    "role": "R1-P",
+    "before": "a contract-composition or question about tool semantics",
+    "after": "a question about contract composition or tool semantics"
+  },
+  {
+    "role": "R1-B",
+    "before": "a contract-composition or question about tool semantics",
+    "after": "a question about contract composition or tool semantics"
+  },
+  {
+    "role": "R2",
+    "before": "Practical proof-assistant or research software experience",
+    "after": "Practical experience with proof assistants or research software"
+  },
+  {
+    "role": "R4",
+    "before": "Strong implementation and skills in experimental design",
+    "after": "Strong implementation skills and skills in experimental design"
+  },
+  {
+    "role": "E1",
+    "before": "flexible, agents using learning methods",
+    "after": "flexible agents using learning methods"
+  },
+  {
+    "role": "R1-P",
+    "before": "for both foundational and researchers focused on implementation",
+    "after": "for researchers focused on foundations or implementation"
+  },
+  {
+    "role": "R1-B",
+    "before": "for both foundational and researchers focused on implementation",
+    "after": "for researchers focused on foundations or implementation"
+  },
+  {
+    "role": "R2",
+    "before": "foundational and profiles focused on implementation are both welcome",
+    "after": "profiles focused on foundations or implementation are both welcome"
+  },
+  {
+    "role": "R4",
+    "before": "an question about interactions between agents",
+    "after": "a question about interactions between agents"
+  }
+]

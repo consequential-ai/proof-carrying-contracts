@@ -1,0 +1,61 @@
+{
+  "mode": "preview",
+  "siteUrl": "https://consequential-ai.github.io/proof-carrying-contracts/",
+  "paper": {
+    "status": "forthcoming",
+    "title": null,
+    "authors": [],
+    "arxivUrl": null,
+    "pdfUrl": null,
+    "publishedDate": null
+  },
+  "implementation": {
+    "status": "upcoming",
+    "demoUrl": null,
+    "repositoryUrl": null
+  },
+  "community": {
+    "updatesUrl": null,
+    "collaborationUrl": null,
+    "contactEmail": null,
+    "contributionInterestUrl": null
+  },
+  "positions": {
+    "agent-safety-infrastructure": {
+      "status": "upcoming",
+      "applicationUrl": null,
+      "deadline": null
+    },
+    "agent-learning-verifiable-reasoning": {
+      "status": "upcoming",
+      "applicationUrl": null,
+      "deadline": null
+    },
+    "contract-calculi-turin": {
+      "status": "upcoming",
+      "applicationUrl": null,
+      "deadline": null
+    },
+    "contract-calculi-milan": {
+      "status": "upcoming",
+      "applicationUrl": null,
+      "deadline": null
+    },
+    "intent-contractualization": {
+      "status": "upcoming",
+      "applicationUrl": null,
+      "deadline": null
+    },
+    "safe-agentic-models": {
+      "status": "upcoming",
+      "applicationUrl": null,
+      "deadline": null
+    },
+    "multi-agent-delegation": {
+      "status": "upcoming",
+      "applicationUrl": null,
+      "deadline": null
+    }
+  },
+  "updates": []
+}

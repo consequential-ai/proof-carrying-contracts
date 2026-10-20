@@ -1,0 +1,100 @@
+{
+  "width": 1536,
+  "height": 1152,
+  "fps": 24,
+  "duration": 45,
+  "fade": 0.55,
+  "states": [
+    {
+      "id": "agreement",
+      "start": 0,
+      "end": 3,
+      "title": "Two agents establish a contract",
+      "detail": "They agree on the task, its constraints, and its completion conditions."
+    },
+    {
+      "id": "first-signature",
+      "start": 3,
+      "end": 5,
+      "title": "Each agent signs the agreement",
+      "detail": "The same contract binds both sides."
+    },
+    {
+      "id": "signed",
+      "start": 5,
+      "end": 8,
+      "title": "Both agents have signed",
+      "detail": "Execution can now begin under the agreed contract."
+    },
+    {
+      "id": "inside",
+      "start": 8,
+      "end": 12,
+      "title": "The executing agent runs inside the Airlock",
+      "detail": "The signed contract governs access to external resources. Payment is held."
+    },
+    {
+      "id": "bad-proposal",
+      "start": 12,
+      "end": 15,
+      "title": "Each tool call must carry a proof",
+      "detail": "The agent submits a proposed email action and its proof for checking."
+    },
+    {
+      "id": "rejected",
+      "start": 15,
+      "end": 19,
+      "title": "Proof rejected — action blocked",
+      "detail": "The tool is not called. External resources remain unchanged."
+    },
+    {
+      "id": "revised",
+      "start": 19,
+      "end": 22,
+      "title": "The agent revises its proposal",
+      "detail": "A new action and proof are submitted to the same checking point."
+    },
+    {
+      "id": "email",
+      "start": 22,
+      "end": 26,
+      "title": "Proof accepted — email tool called",
+      "detail": "Only after the check succeeds is access permitted. The result is recorded."
+    },
+    {
+      "id": "database-proposal",
+      "start": 26,
+      "end": 29,
+      "title": "The next action also needs a proof",
+      "detail": "Access to the database requires a separate checked tool call."
+    },
+    {
+      "id": "database",
+      "start": 29,
+      "end": 33,
+      "title": "Proof accepted — database tool called",
+      "detail": "The agent stays inside the Airlock. A second result is recorded."
+    },
+    {
+      "id": "settlement",
+      "start": 33,
+      "end": 37,
+      "title": "The agent calls the final check",
+      "detail": "The settlement call carries a proof of completion, supported by the execution record."
+    },
+    {
+      "id": "completion",
+      "start": 37,
+      "end": 40,
+      "title": "Completion is verified against the contract",
+      "detail": "The final check establishes that the agreed completion conditions hold."
+    },
+    {
+      "id": "paid",
+      "start": 40,
+      "end": 45,
+      "title": "The Airlock releases the payment",
+      "detail": "Payment is released to the contractor after successful verification of completion."
+    }
+  ]
+}

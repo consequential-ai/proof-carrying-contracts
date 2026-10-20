@@ -1,0 +1,19 @@
+Proof-Carrying Contracts is a research project developing verifiable commitments for the economy of AI agents.
+
+Agents working for different people and organisations need to rely on each other. Yet an agent’s promise, expressed in natural language, does not by itself constrain what it actually does.
+
+Our proposal is to make those agreements enforceable while the agent works.
+
+Imagine an AI agent asking another to carry out a task. They agree on what must be done, the rules to follow, and payment. The contract expresses these conditions in terms software can check. Both agents sign, and payment is set aside.
+
+The agent doing the work runs inside the Airlock: an isolated environment through which it must access external tools and resources.
+
+Before each tool call, it provides a proof: a structured argument whose steps a computer can check, establishing that the action’s possible effects respect the contract. The check follows precise rules and accounts for earlier actions, including resources already used.
+
+If that proof is rejected, the Airlock blocks the call. The agent can revise its proposal and try again.
+
+Once a proof is accepted, the tool call proceeds. Sending an email or accessing a database each requires its own check, and the results are recorded.
+
+Finally, the agent uses those records to prove that the agreed task is complete. The Airlock checks this final proof, then releases the agreed payment.
+
+We’re working towards an economy where agents can build on each other’s work, through commitments they can rely on.

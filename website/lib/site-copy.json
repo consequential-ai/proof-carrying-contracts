@@ -1,0 +1,936 @@
+{
+  "0.1": {
+    "blocks": [],
+    "tables": []
+  },
+  "0.2": {
+    "blocks": [],
+    "tables": []
+  },
+  "0.3": {
+    "blocks": [],
+    "tables": []
+  },
+  "1.1": {
+    "blocks": [
+      "index.html\n\ndata/overview.html\ndata/get-involved.html\ndata/positions.html               compatibility page\ndata/protocol.html                compatibility page\ndata/identity.html                unlinked internal identity study\n\ndata/site-v2.js                   menu, compatibility redirects, hero animation\ndata/film.js                      overview film and fallback\n\ndata/styles.css\n\ndata/logos/sda-bocconi.svg\ndata/logos/ai4i.png\ndata/logos/ucl.svg\ndata/logos/inria.svg\ndata/logos/pc2-bracket-turnstile.svg\n\ndata/media/site/contract-formation-desktop.svg\ndata/media/site/contract-formation-mobile.svg\ndata/media/site/proof-gated-execution-desktop.svg\ndata/media/site/proof-gated-execution-mobile.svg\ndata/media/site/delegation-desktop.svg\ndata/media/site/delegation-mobile.svg\ndata/media/site/pc2-social-preview.png\n\ndata/media/overview/pc2-overview.mp4\ndata/media/overview/pc2-overview.mp3\ndata/media/overview/pc2-overview.vtt\ndata/media/overview/pc2-overview.txt",
+      "data/positions/agent-safety-infrastructure.html\ndata/positions/agent-learning-verifiable-reasoning.html\ndata/positions/contract-calculi-turin.html\ndata/positions/contract-calculi-milan.html\ndata/positions/intent-contractualization.html\ndata/positions/safe-agentic-models.html\ndata/positions/multi-agent-delegation.html"
+    ],
+    "tables": []
+  },
+  "2.1": {
+    "blocks": [
+      "PC2 | Proof Carrying Contracts",
+      "PC2, Proof Carrying Contracts, home"
+    ],
+    "tables": []
+  },
+  "2.2": {
+    "blocks": [],
+    "tables": [
+      [
+        [
+          "Existing display wording",
+          "Required display wording"
+        ],
+        [
+          "Proof-Carrying Contracts",
+          "Proof Carrying Contracts"
+        ],
+        [
+          "multi-agent systems",
+          "multiagent systems"
+        ],
+        [
+          "Multi-Agent Coordination and Verifiable Delegation",
+          "Multiagent Coordination and Verifiable Delegation"
+        ],
+        [
+          "multi-principal scenarios",
+          "scenarios with distinct principals"
+        ],
+        [
+          "proof-gated execution",
+          "execution governed by proof checks"
+        ],
+        [
+          "machine-checkable evidence",
+          "machine verifiable evidence"
+        ],
+        [
+          "machine-checked guarantees",
+          "guarantees checked by a proof assistant"
+        ],
+        [
+          "open-source project",
+          "open source project"
+        ],
+        [
+          "contract-sensitive action",
+          "action governed by the contract"
+        ],
+        [
+          "PC2-enabled interaction",
+          "interaction using PC2"
+        ],
+        [
+          "Contract calculi — Turin",
+          "Contract calculi (Turin)"
+        ],
+        [
+          "Full-time",
+          "Full time"
+        ],
+        [
+          "November 2026–January 2027",
+          "November 2026 to January 2027"
+        ],
+        [
+          "PC2-Bench` in display prose",
+          "PC2 Bench"
+        ]
+      ]
+    ]
+  },
+  "2.3": {
+    "blocks": [],
+    "tables": []
+  },
+  "2.4": {
+    "blocks": [
+      "Overview\nGet involved\nPC2 foundations paper (forthcoming)"
+    ],
+    "tables": []
+  },
+  "3.1": {
+    "blocks": [
+      "An open protocol for AI agents",
+      "A commitment layer for the agent economy.",
+      "The agent protocol stack is taking shape around MCP for tools and data, A2A for agent communication, and AP2 for payment authorisation. PC2 is developing a general commitment layer for this stack: contracts that govern actions, preserve obligations through delegation, and make completion checkable between principals whose interests may conflict."
+    ],
+    "tables": []
+  },
+  "3.2": {
+    "blocks": [
+      "Enforceable agreements between distrusting principals",
+      "Agents act on behalf of principals: the people or organisations whose goals and resources they represent. When agents exchange services or delegate work, their principals may have conflicting interests and need commitments they can verify without relying on the counterparty's agent to comply voluntarily."
+    ],
+    "tables": []
+  },
+  "3.3": {
+    "blocks": [
+      "The central idea",
+      "Agents agree, act and delegate under a contract",
+      "The parties define the task and its conditions in a shared contract. The execution mechanism checks the required evidence before permitting an action, including an action that delegates part of the task to another agent.",
+      "Read the protocol overview"
+    ],
+    "tables": [
+      [
+        [
+          "Step",
+          "H3",
+          "Paragraph",
+          "Figure"
+        ],
+        [
+          "01",
+          "Establish a shared contract",
+          "The participating agents agree on the task, resources, constraints and completion conditions. Their principals approve the contract and the execution environment.",
+          "home-contract-illustration.svg"
+        ],
+        [
+          "02",
+          "Check before execution",
+          "A proposed action is checked against the contract, current state and declared tool effects. An accepted proof permits the governed tool call.",
+          "home-airlock-440.webp"
+        ],
+        [
+          "03",
+          "Delegate within the agreement",
+          "A subcontract assigns a defined subtask and its authority to another agent. Its commitments must remain consistent with the parent contract and existing delegations.",
+          "home-delegation-440.webp"
+        ]
+      ]
+    ]
+  },
+  "3.4": {
+    "blocks": [
+      "The research questions behind PC2",
+      "The programme studies whether useful requirements can be formalized faithfully, whether agents can act under them at practical cost, and what protection the resulting system provides.",
+      "Methods and evaluation"
+    ],
+    "tables": [
+      [
+        [
+          "Number",
+          "H3",
+          "Paragraph"
+        ],
+        [
+          "01",
+          "Contract semantics and intent",
+          "How can a formal contract capture what each principal intends? We study contract languages, interactive formalization and the conditions under which contractual guarantees compose."
+        ],
+        [
+          "02",
+          "Verified action and delegation",
+          "How can agents produce the evidence required for useful work? We develop proof methods, verified tools and execution infrastructure that preserve contractual constraints through action, delegation and settlement."
+        ],
+        [
+          "03",
+          "Adversarial evaluation",
+          "What protection does PC2 provide, and at what cost? We evaluate contract fidelity, prevented violations, useful task completion and computational overhead in benign and adversarial multi-principal interactions."
+        ]
+      ]
+    ]
+  },
+  "3.5": {
+    "blocks": [
+      "The paper develops the mathematical model of contracts, execution and delegation, with proofs under stated assumptions. The public preprint will be linked here when it is released.\n\nA demonstration and repository will follow, with instructions for running an initial example and examining its contract and execution."
+    ],
+    "tables": []
+  },
+  "3.6": {
+    "blocks": [
+      "Research for the economy of AI agents",
+      "PC2 brings together research groups at SDA Bocconi, UCL, AI4I and Inria, connecting machine learning, formal verification, programming languages, agent systems and the economics of cooperation.\n\nThis combination connects the protocol's formal guarantees with the incentives and conditions that make exchanges between independent parties viable. The shared objective is to develop commitments that agents can establish, rely on and preserve through execution.",
+      "REAL\nPRAXIS\nComputer Science\nSTAMP"
+    ],
+    "tables": []
+  },
+  "3.7": {
+    "blocks": [
+      "Build the science and infrastructure of PC2",
+      "Research and engineering appointments span contract theory, intent contractualization, agent learning, execution infrastructure and interactions between distinct principals. Joining the programme provides scope to develop an identifiable contribution to its methods and public artifacts.\n\nResearchers and developers can also take part through scientific discussion, challenging use cases and, as implementations are released, testing and code contributions."
+    ],
+    "tables": [
+      [
+        [
+          "Label",
+          "Destination"
+        ],
+        [
+          "Open positions",
+          "data/get-involved.html#open-positions"
+        ],
+        [
+          "Collaboration and community",
+          "data/get-involved.html#collaboration"
+        ]
+      ]
+    ]
+  },
+  "4.1": {
+    "blocks": [
+      "How PC2 works",
+      "PC2 connects agreements between agents to the actions they execute. Its reference design combines a formal contract, proof checking for governed actions, and rules for delegation and completion.",
+      "The travel example below follows an agreement between distinct principals through execution, delegation and settlement. The scientific programme then explains how the proposed guarantees and practical costs will be assessed."
+    ],
+    "tables": [
+      [
+        [
+          "Label",
+          "Section"
+        ],
+        [
+          "Agreement",
+          "contract-formation"
+        ],
+        [
+          "Execution",
+          "execution"
+        ],
+        [
+          "Delegation",
+          "delegation"
+        ],
+        [
+          "Completion",
+          "completion"
+        ],
+        [
+          "Research",
+          "research"
+        ],
+        [
+          "Paper and code",
+          "foundations"
+        ]
+      ]
+    ]
+  },
+  "4.2": {
+    "blocks": [
+      "A PC2 interaction",
+      "The narrated animation follows a contract from agreement through tool use to completion and payment. The sections below explain the mechanism and extend the interaction to multi-principal delegation.",
+      "The animation illustrates the protocol design. The planned demonstration and repository will provide a separate executable example."
+    ],
+    "tables": []
+  },
+  "4.3": {
+    "blocks": [
+      "Establishing the contract",
+      "A principal is the person or organisation an agent represents. Consider a traveller's agent commissioning a provider's agent to arrange a trip. The traveller specifies a budget and rules for disclosing documents. The provider agrees what it will deliver and what evidence establishes completion.\n\nThe parties express the agreement as a formal contract. It describes the relevant resources and their initial state, the constraints that must remain satisfied, and the goal that defines completion. A paid interaction also specifies its payment arrangement and the conditions for expiry or refund.",
+      "One contract approved by both parties",
+      "The participating agents work towards a common specification of the task and its constraints. The principals approve the contract and the execution environment that will enforce it.",
+      "Contract assistants can draft candidate terms, explain them in ordinary language and generate examples that reveal ambiguity or unintended permissions. These steps help the principals review what the formal contract actually permits before approving it. Enforcement applies to the signed terms; a mismatch with the intended requirement remains possible.",
+      "Conditions that require expert judgement",
+      "The parties can agree on an evaluation procedure for a condition that requires judgement, such as whether accommodation meets a stated rubric. Its verdict becomes an input to the formal reasoning. The reliability of that judgement remains a separate evaluation question; the proof checker establishes what follows from the supplied verdict and the contract."
+    ],
+    "tables": []
+  },
+  "4.4": {
+    "blocks": [
+      "Checking actions before execution",
+      "The Airlock is the controlled execution environment in PC2's reference design. It maintains the contractual state and mediates the executing agent's access to the governed resources. Before signing, both principals check its remote attestation: evidence that it runs the agreed reference build.\n\nFor each proposed tool call, the system constructs the statement that must be proved under the contract and current state. The proof must establish that every outcome covered by the tool's declared model preserves the required constraints.\n\nPC2's reference research uses Lean, a proof assistant that checks formal proofs against precise definitions and logical rules. Models and automated methods can construct candidate proofs; the checker validates the final argument independently of how it was generated.",
+      "The proof check controls the tool call",
+      "The proposed action and its proof are checked using the contract, current state and declared tool effects. An accepted proof permits execution. The resulting state is then available for subsequent checks.",
+      "Without an accepted proof, the governed tool call does not execute. The agent can revise its plan, seek further evidence or stop. A failed attempt may reflect the limits or cost of proof search even when the proposed action satisfies the contract.\n\nEach executed call updates the recorded state. For example, a new booking must be considered together with money already committed to the trip. The guarantee is relative to the signed contract and its trusted base: the proof checker and obligation compiler, the Airlock, tool models and implementations, and the attestation and payment infrastructure. Expert verdicts, when used, are also assumptions of the reasoning."
+    ],
+    "tables": [
+      [
+        [
+          "Label",
+          "Description"
+        ],
+        [
+          "Proof generation",
+          "Construct an argument using formal libraries, automated reasoning and learned methods."
+        ],
+        [
+          "Proof checking",
+          "Validate the submitted argument against the statement required for the proposed action."
+        ]
+      ]
+    ]
+  },
+  "4.5": {
+    "blocks": [
+      "Preserving commitments through delegation",
+      "A provider may assign the visa part of a travel task to a sub-agent acting for another principal. The subcontract defines that subtask, the resources available to the sub-agent and the conditions under which it may act.\n\nPC2 treats delegation as a governed action. Before creating a subcontract, the contractor must supply a proof that the proposed child contract, considered together with its outstanding delegations, preserves the parent contract's constraints and resource limits.",
+      "A subtask remains governed by the parent agreement",
+      "The new subcontract is checked alongside existing delegations before authority is passed to the sub-agent. It must fit within the resources and restrictions already committed by the parent contract.",
+      "In the travel example, the visa service receives the authority and access assigned to its subtask. Documents governed by the contract remain in controlled custody and are accessed through the permitted interfaces. The parent agreement continues to constrain the overall task as work passes between agents.\n\nThe proposed composition guarantee applies within a contract tree. Aggregate obligations and interference across separate contract trees remain open research questions."
+    ],
+    "tables": []
+  },
+  "4.6": {
+    "blocks": [
+      "Completion and settlement",
+      "Completion is governed by the contract, whether or not work has been delegated. The executing agent uses recorded actions, delegation certificates and any agreed expert verdicts to prove that the goal has been reached. Where payment is involved, settlement requires the corresponding checked proof. Expiry and refund conditions follow the contract and the selected payment mechanism."
+    ],
+    "tables": []
+  },
+  "4.7": {
+    "blocks": [
+      "How the protocol will be tested",
+      "The project will release a formal protocol, a research reference implementation and PC2-Bench. Together, these instruments will establish which guarantees follow from the model, how faithfully the implementation enforces it, and whether the approach is useful on realistic tasks.",
+      "The resulting feasibility map will report which requirements can be expressed, which proofs can be produced and which settings justify the cost. Failures and residual risks will be reported alongside successful cases. Evaluation runs throughout development and informs the scope of the contract language and tool library."
+    ],
+    "tables": [
+      [
+        [
+          "Section",
+          "H3",
+          "Paragraphs"
+        ],
+        [
+          "formal-evidence",
+          "Formal guarantees and conformance",
+          "The formal development will prove preservation of contractual constraints, completion requirements for settlement, and preservation through delegation under explicit assumptions. A conformance suite will connect those assumptions to tests of the reference Airlock, including isolation, state custody, proof checking and logging.\n\nTool implementations will be checked against their formal models. The release will distinguish machine-checked theorems from implementation properties supported by testing and state the components that remain trusted."
+        ],
+        [
+          "feasibility-evidence",
+          "Contract fidelity and proof cost",
+          "Candidate contracts will be assessed against scenario requirements and held-out examples of permitted and prohibited behaviour. These comparisons will measure omissions and unintended permissions, including failures involving agreed expert judgements.\n\nFor each proof obligation, the experiments will record whether it is solved by symbolic automation, requires an AI prover, or remains unresolved. Ablations will isolate the contributions of formalization and proof methods, with latency and cost reported by task, contract complexity and delegation depth."
+        ],
+        [
+          "adversarial-evidence",
+          "Adversarial comparison with PC2-Bench",
+          "PC2-Bench will use persistent sandboxed services for procurement, booking, confidential document processing and delegated service chains. Benign and attacked variants will compare PC2 with undefended agents, prompt and monitor safeguards, and deterministic policy defences under matched tasks and comparable configuration effort.\n\nAttacks will target counterparties, tool inputs, colluding delegates, expert judgements and settlement. Measurements will include prohibited actions, legitimate task completion, latency and cost. Held-out attack suites, external submissions and a contracted independent red team will provide complementary scrutiny; the Airlock team's own tests will be identified as self-evaluation."
+        ]
+      ]
+    ]
+  },
+  "4.8": {
+    "blocks": [
+      "Paper and implementation",
+      "Explore the research positions"
+    ],
+    "tables": [
+      [
+        [
+          "Title",
+          "Description",
+          "Current status"
+        ],
+        [
+          "Implementation demonstration",
+          "An executable example of contracts, checked actions and delegation.",
+          "Upcoming"
+        ],
+        [
+          "Repository",
+          "Source code and instructions for running and extending the released implementation.",
+          "Upcoming"
+        ]
+      ]
+    ]
+  },
+  "4.9": {
+    "blocks": [],
+    "tables": [
+      [
+        [
+          "Remove",
+          "Replace with"
+        ],
+        [
+          "How a contract becomes part of execution.",
+          "How PC2 works"
+        ],
+        [
+          "A short walkthrough",
+          "A PC2 interaction"
+        ],
+        [
+          "Give the undertaking a precise meaning.",
+          "Establishing the contract"
+        ],
+        [
+          "Evidence before the action.",
+          "Checking actions before execution"
+        ],
+        [
+          "Delegate the work, not the right to break the agreement.",
+          "Preserving commitments through delegation"
+        ],
+        [
+          "A commitment layer, not a replacement for the stack.",
+          "PC2 in the agent protocol stack"
+        ],
+        [
+          "Make the commitment practical.",
+          "Formal foundations, learning and evaluation"
+        ],
+        [
+          "Inspect the foundations. Follow the implementation.",
+          "Paper and implementation"
+        ],
+        [
+          "A shared undertaking before execution begins.",
+          "One contract approved by both parties"
+        ],
+        [
+          "The checked argument governs the action.",
+          "The proof check controls the tool call"
+        ],
+        [
+          "New work is checked against commitments already made.",
+          "A subtask remains governed by the parent agreement"
+        ]
+      ]
+    ]
+  },
+  "5.1": {
+    "blocks": [
+      "Get involved",
+      "Help develop the methods and infrastructure behind Proof Carrying Contracts. The programme brings together research in formal methods, machine learning and agent systems, with opportunities to lead a distinct contribution through an appointment or take part in scientific discussion and external evaluation."
+    ],
+    "tables": []
+  },
+  "5.2": {
+    "blocks": [
+      "The following research and engineering roles are being prepared. Each has a primary base in Milan or Turin and collaboration across the participating groups. Application instructions will appear with each call as it is finalised.",
+      "The role pages explain each research direction, its contribution to the programme, the working environment and the appointment details."
+    ],
+    "tables": [
+      [
+        [
+          "Existing role URL filename",
+          "Card title",
+          "Description"
+        ],
+        [
+          "agent-safety-infrastructure.html",
+          "Agent Safety Infrastructure",
+          "Build the Airlock and reusable infrastructure connecting proof checks to tools, resources and execution."
+        ],
+        [
+          "agent-learning-verifiable-reasoning.html",
+          "Agent Learning and Verifiable Reasoning",
+          "Lead model development and training methods for agents that reason about contracts and produce evidence for their actions."
+        ],
+        [
+          "contract-calculi-turin.html",
+          "Contract Calculi and Verifiable Agent Tools",
+          "Develop formal foundations and reusable representations of domains, resources and tool effects."
+        ],
+        [
+          "contract-calculi-milan.html",
+          "Contract Calculi and Verifiable Agent Tools",
+          "Connect contract semantics and compositional guarantees to verifiable action and delegation."
+        ],
+        [
+          "intent-contractualization.html",
+          "AI and Formal Methods for Intent Contractualization",
+          "Study how agents capture ambiguous requirements, formulate contracts and expose unintended permissions."
+        ],
+        [
+          "safe-agentic-models.html",
+          "Learning and Evaluation of Safe Agentic Models",
+          "Develop and evaluate capable agents that plan and act under explicit constraints checked by the system."
+        ],
+        [
+          "multi-agent-delegation.html",
+          "Multiagent Coordination and Verifiable Delegation",
+          "Investigate how interaction structures and delegation affect commitments across different principals."
+        ]
+      ]
+    ]
+  },
+  "5.3": {
+    "blocks": [
+      "Collaboration and community",
+      "Scientific discussion, external scrutiny and contributions from other implementations will help develop the protocol. Researchers and developers are invited to bring relevant methods, difficult requirements and concrete interaction scenarios.",
+      "Follow the foundations paper, implementation releases and opportunities for public discussion.",
+      "Release announcements will appear on this website. A dedicated updates channel is being prepared.",
+      "Bring a research connection, a requirement that is difficult to express, or an interaction in which agents need to rely on a commitment. Relevant discussions include contract semantics, tool interfaces, delegation and adversarial behaviour.",
+      "A project contact route will be added before public launch.",
+      "The first demonstration and repository will provide examples to run, contracts and tool cases to examine, and an implementation to test under adversarial conditions. Supported contribution tasks and instructions will be published with the relevant releases.\n\nDiscussion of the paper and its assumptions is welcome before those implementation resources become available."
+    ],
+    "tables": []
+  },
+  "6.1": {
+    "blocks": [],
+    "tables": []
+  },
+  "6.2": {
+    "blocks": [
+      "Agent A                           Agent B\n       approval               approval\n                  Shared contract\n                  Task\n                  Constraints\n                  Completion",
+      "A terracotta contractor agent and a blue client agent connect to one shared contract, signed in both colours."
+    ],
+    "tables": []
+  },
+  "6.3": {
+    "blocks": [
+      "                         Contract + state\n                                |\nAgent B -- Action + proof --> Check -- Accepted --> Tool\n                                |\n                       No accepted proof\n                           No tool call",
+      "An agent submits an e-mail request with an ochre ⊢ proof tag. The checker linked to the signed contract shows a large green light, and the Airlock gate is halfway open. The e-mail service remains outside."
+    ],
+    "tables": []
+  },
+  "6.4": {
+    "blocks": [
+      "Main task: Agent B + Parent contract\n                   |\n            Delegation check\n                   |\nSubtask:   Agent C + Subcontract",
+      "A terracotta agent delegates to three purple sub-agents. Each retains a copy of the parent contract signed in blue and red, with a distinct lavender addendum signed in red and purple."
+    ],
+    "tables": []
+  },
+  "6.5": {
+    "blocks": [
+      "data/media/site/contract-formation-desktop.svg\ndata/media/site/contract-formation-mobile.svg",
+      "The traveller agent and provider agent contribute to one shared contract defining the task, resources, constraints and completion conditions. Both principals approve the contract and its execution environment."
+    ],
+    "tables": []
+  },
+  "6.6": {
+    "blocks": [
+      "data/media/site/proof-gated-execution-desktop.svg\ndata/media/site/proof-gated-execution-mobile.svg",
+      "An agent inside the Airlock proposes an action with a proof. The proof check inside the Airlock uses the contract, current state and declared tool model. Acceptance permits the governed tool call outside the Airlock. Without an accepted proof, no tool call executes. In either case, the check result returns to the agent through a feedback loop below the main flow. After execution, the recorded result updates the state used for the next check."
+    ],
+    "tables": []
+  },
+  "6.7": {
+    "blocks": [
+      "data/media/site/delegation-desktop.svg\ndata/media/site/delegation-mobile.svg",
+      "The provider proposes a subcontract with a proof. The proof check considers the parent contract and existing delegations together. Acceptance establishes an approved subcontract that assigns scoped authority to the sub-agent. The parent constraints remain in force."
+    ],
+    "tables": []
+  },
+  "6.8": {
+    "blocks": [],
+    "tables": []
+  },
+  "7.1": {
+    "blocks": [],
+    "tables": [
+      [
+        [
+          "Location",
+          "Label",
+          "Destination"
+        ],
+        [
+          "Shared header",
+          "PC2 foundations paper (forthcoming)",
+          "Overview `#foundations"
+        ],
+        [
+          "Homepage hero",
+          "PC2 foundations paper (forthcoming)",
+          "Homepage `#foundations"
+        ],
+        [
+          "Overview opening",
+          "PC2 foundations paper (forthcoming)",
+          "Overview `#foundations"
+        ],
+        [
+          "Shared footer",
+          "PC2 foundations paper (forthcoming)",
+          "Overview `#foundations"
+        ],
+        [
+          "Main paper feature",
+          "PC2 foundations paper",
+          "No invented external link; adjacent status `Forthcoming"
+        ]
+      ]
+    ]
+  },
+  "7.2": {
+    "blocks": [],
+    "tables": [
+      [
+        [
+          "Page location",
+          "Home",
+          "Overview",
+          "Get involved",
+          "Paper section"
+        ],
+        [
+          "index.html",
+          "index.html",
+          "data/overview.html",
+          "data/get-involved.html",
+          "data/overview.html#foundations"
+        ],
+        [
+          "data/*.html",
+          "../index.html",
+          "overview.html",
+          "get-involved.html",
+          "overview.html#foundations"
+        ],
+        [
+          "data/positions/*.html",
+          "../../index.html",
+          "../overview.html",
+          "../get-involved.html",
+          "../overview.html#foundations"
+        ]
+      ]
+    ]
+  },
+  "7.3": {
+    "blocks": [
+      "PC2 | Proof Carrying Contracts",
+      "An academically backed initiative developing an open commitment protocol for AI agents.",
+      "Overview\nGet involved\nPC2 foundations paper (forthcoming)\nBack to top"
+    ],
+    "tables": []
+  },
+  "7.4": {
+    "blocks": [],
+    "tables": [
+      [
+        [
+          "Page",
+          "Document title",
+          "Description"
+        ],
+        [
+          "Home",
+          "PC2 \\",
+          "Proof Carrying Contracts",
+          "An open protocol for enforceable agreements between AI agents representing different people and organisations."
+        ],
+        [
+          "Overview",
+          "How PC2 works \\",
+          "Proof Carrying Contracts",
+          "An accessible introduction to PC2 contracts, proof checking, controlled execution and delegation."
+        ],
+        [
+          "Get involved",
+          "Get involved \\",
+          "Proof Carrying Contracts",
+          "Research and engineering positions, collaboration and opportunities to contribute to Proof Carrying Contracts."
+        ]
+      ]
+    ]
+  },
+  "8.1": {
+    "blocks": [
+      "The research aims to understand the relationship between learning, planning and verification: can agents use formal feedback to perform more useful work, rather than simply avoid actions that might fail a check?",
+      "The research examines how learning, planning and verification affect useful task completion, compliance with the agreed constraints and responses to failed proof attempts.",
+      "Formal methods, dependent type theory, proof assistants or specification-based testing; these are useful additions rather than prerequisites.",
+      "Formal methods, dependent type theory, proof assistants or testing based on specifications are welcome additional areas of experience."
+    ],
+    "tables": [
+      [
+        [
+          "Existing phrase",
+          "Replacement"
+        ],
+        [
+          "hands-on experience",
+          "practical experience"
+        ],
+        [
+          "fine-tuning",
+          "fine tuning"
+        ],
+        [
+          "post-training",
+          "post training"
+        ],
+        [
+          "held-out cases",
+          "held out cases"
+        ],
+        [
+          "machine-learning models",
+          "machine learning models"
+        ],
+        [
+          "model-development project",
+          "model development project"
+        ],
+        [
+          "proof-generating agents",
+          "agents that generate proofs"
+        ],
+        [
+          "proof-checking interfaces",
+          "interfaces for proof checking"
+        ],
+        [
+          "formal-methods researchers",
+          "researchers in formal methods"
+        ],
+        [
+          "proof-assistant environment",
+          "proof assistant environment"
+        ],
+        [
+          "implementation-oriented researchers",
+          "researchers focused on implementation"
+        ],
+        [
+          "learning-based methods",
+          "methods based on learning"
+        ],
+        [
+          "counterexample-guided refinement",
+          "refinement guided by counterexamples"
+        ],
+        [
+          "Counterexample-guided methods",
+          "Methods guided by counterexamples"
+        ],
+        [
+          "resource-sensitive reasoning",
+          "reasoning about resource constraints"
+        ],
+        [
+          "programming-language semantics",
+          "programming language semantics"
+        ],
+        [
+          "contract-composition question",
+          "question about contract composition"
+        ],
+        [
+          "tool-semantics question",
+          "question about tool semantics"
+        ],
+        [
+          "payment-like resource operations",
+          "resource operations such as payments"
+        ],
+        [
+          "environment-specific adapters",
+          "adapters for individual environments"
+        ],
+        [
+          "system-level outcomes",
+          "outcomes across the system"
+        ],
+        [
+          "principal-level constraints",
+          "constraints associated with each principal"
+        ],
+        [
+          "interaction-level question",
+          "question about interactions between agents"
+        ],
+        [
+          "experimental-design skills",
+          "skills in experimental design"
+        ],
+        [
+          "large-scale model training",
+          "training large models"
+        ],
+        [
+          "non-public work",
+          "work that cannot be shared publicly"
+        ],
+        [
+          "research-software experience",
+          "research software experience"
+        ],
+        [
+          "cross-lab collaboration",
+          "collaboration across laboratories"
+        ],
+        [
+          "policy-aware planning",
+          "planning that accounts for policies"
+        ],
+        [
+          "co-lead technical contributions",
+          "jointly lead technical contributions"
+        ],
+        [
+          "problem-solving processes",
+          "processes for solving problems"
+        ]
+      ]
+    ]
+  },
+  "8.2": {
+    "blocks": [],
+    "tables": []
+  },
+  "8.3": {
+    "blocks": [],
+    "tables": []
+  },
+  "9.1": {
+    "blocks": [],
+    "tables": []
+  },
+  "9.2": {
+    "blocks": [],
+    "tables": []
+  },
+  "9.3": {
+    "blocks": [
+      "<a class=\"institution bocconi\" href=\"EXISTING_APPROVED_DESTINATION\">\n  <div class=\"logo-slot\">\n    <img src=\"data/logos/sda-bocconi.svg\" alt=\"SDA Bocconi School of Management\" width=\"240\" height=\"100\" loading=\"lazy\" decoding=\"async\">\n  </div>\n  <span>REAL <span class=\"arrow\" aria-hidden=\"true\">↗</span></span>\n</a>"
+    ],
+    "tables": [
+      [
+        [
+          "Institution class",
+          "Image",
+          "Group label",
+          "Existing destination"
+        ],
+        [
+          "bocconi",
+          "data/logos/sda-bocconi.svg",
+          "REAL",
+          "https://www.sdabocconi.it/en/faculty-research/faculty-knowledge/alessandro-rudi/"
+        ],
+        [
+          "ai4i",
+          "data/logos/ai4i.png",
+          "PRAXIS",
+          "https://ai4i.it/rde-labs/#PRAXIS"
+        ],
+        [
+          "ucl",
+          "data/logos/ucl.svg",
+          "Computer Science",
+          "https://profiles.ucl.ac.uk/60171-carlo-ciliberto"
+        ],
+        [
+          "inria",
+          "data/logos/inria.svg",
+          "STAMP",
+          "https://www.inria.fr/en/stamp"
+        ]
+      ]
+    ]
+  },
+  "9.4": {
+    "blocks": [],
+    "tables": []
+  },
+  "9.5": {
+    "blocks": [],
+    "tables": []
+  },
+  "11.1": {
+    "blocks": [],
+    "tables": []
+  },
+  "11.2": {
+    "blocks": [
+      "1440 × 1000\n1280 × 900\n1024 × 768\n768 × 1024\n390 × 844\n360 × 800"
+    ],
+    "tables": [
+      [
+        [
+          "Component",
+          "What you must inspect and pass"
+        ],
+        [
+          "Hero",
+          "The name dominates the tagline; the body text is readable; no vacant right-hand region or excessive vertical gap remains; the title and actions fit at 360px."
+        ],
+        [
+          "Homepage rhythm",
+          "Mission, mechanism, research, paper, institutions and participation have distinct but coherent compositions. No repeated filler slogan or succession of identical generic cards has been added."
+        ],
+        [
+          "Small diagrams",
+          "Both parties are visible in agreement; the accepted path crosses the check; the failed path stops; the third scene clearly assigns a subtask to another agent."
+        ],
+        [
+          "Overview figures",
+          "Labels are readable without opening the full-size image. No diagram loses an important relation on mobile. Captions agree with the depicted edges and states."
+        ],
+        [
+          "Institution grid",
+          "Same slot height; natural aspect ratios; aligned rule/label baselines in each row; sensible optical weight. AI4I must no longer dominate through a square 220px image."
+        ],
+        [
+          "Actions and links",
+          "One line treatment on text CTAs. No extra underline beneath text inside a bordered or filled button, including the arrow. Inline prose links remain identifiable."
+        ],
+        [
+          "Sticky navigation",
+          "Headings and figure labels are not hidden behind the header after following an anchor. Long paper labels do not collide with other navigation items."
+        ],
+        [
+          "Typography",
+          "Body size and leading are coherent; short captions are legible; headings do not create awkward isolated words through unnecessary hard breaks."
+        ],
+        [
+          "Participation",
+          "Jobs remain the first content section; collaboration is accessible directly; upcoming contributions remain accurately labelled."
+        ],
+        [
+          "Film",
+          "The poster, controls, captions, chapter selection and fallback remain usable, with no broken paths caused by new files or anchors."
+        ]
+      ]
+    ]
+  },
+  "11.3": {
+    "blocks": [],
+    "tables": []
+  },
+  "11.4": {
+    "blocks": [],
+    "tables": []
+  },
+  "11.5": {
+    "blocks": [],
+    "tables": []
+  }
+}
