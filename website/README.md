@@ -69,5 +69,5 @@ local references, accessibility markup, specified text contrast combinations,
 release states, chapter timing and TypeScript. It runs without a preview server
 or access to the original local repository.
 
-The repository's existing [license](../LICENSE) is retained. Bundled font licenses
+The repository's existing [license](../LICENSE) is retained. Bundled font and icon licenses
 are in `scripts/static-licenses/` and are included in the deployed files.

@@ -1,6 +1,7 @@
 import { SiteLink } from '@/components/site-link';
 import { FileText } from 'lucide-react';
 import { AirlockMark } from './airlock-mark';
+import { GitHubMark } from './github-mark';
 import { c, config, paperPublished } from '@/lib/site-data';
 
 export function Arrow({ down = false }: { down?: boolean }) {
@@ -13,9 +14,12 @@ export function PaperLink({ local = false, className = 'text-link', down = false
     <span aria-hidden="true">{paperPublished ? '↗' : down ? '↓' : ''}</span>
   </SiteLink>;
 }
-export function RepositoryLink({ className = 'text-link', label = 'GitHub repository' }: { className?: string; label?: string }) {
+export function RepositoryLink({ iconOnly = false }: { iconOnly?: boolean }) {
   if (!config.implementation.repositoryUrl) return null;
-  return <a className={className} href={config.implementation.repositoryUrl}>{label} <span aria-hidden="true">↗</span></a>;
+  return <a className={iconOnly ? 'repository-icon-link' : 'text-link'} href={config.implementation.repositoryUrl} aria-label={iconOnly ? 'PC2 repository on GitHub' : undefined} title={iconOnly ? 'PC2 repository on GitHub' : undefined}>
+    <GitHubMark size={iconOnly ? 24 : 18} />
+    {!iconOnly && <><span>GitHub repository</span><span aria-hidden="true">↗</span></>}
+  </a>;
 }
 export function SiteHeader({ active }: { active?: 'overview' | 'get-involved' }) {
   return <>
@@ -31,7 +35,7 @@ export function SiteHeader({ active }: { active?: 'overview' | 'get-involved' })
         <nav id="project-navigation" aria-label="Project navigation">
           <SiteLink href="/overview" aria-current={active === 'overview' ? 'page' : undefined}>Overview</SiteLink>
           <SiteLink href="/get-involved" aria-current={active === 'get-involved' ? 'page' : undefined}>Get involved</SiteLink>
-          <RepositoryLink className="nav-repository" label="GitHub" />
+          <RepositoryLink iconOnly />
           <PaperLink className="nav-paper" />
         </nav>
       </div>
@@ -42,7 +46,7 @@ export function SiteFooter() {
   return <footer className="site-footer shell v2-footer">
     <div><SiteLink className="footer-brand" href="/"><AirlockMark className="brand-mark" />PC2 | Proof Carrying Contracts</SiteLink>
       <p>An academically backed initiative developing an open commitment protocol for AI agents.</p></div>
-    <nav aria-label="Footer navigation"><SiteLink href="/overview">Overview</SiteLink><SiteLink href="/get-involved">Get involved</SiteLink><RepositoryLink label="GitHub" /><PaperLink /><a href="#top">Back to top <span aria-hidden="true">↑</span></a></nav>
+    <nav aria-label="Footer navigation"><SiteLink href="/overview">Overview</SiteLink><SiteLink href="/get-involved">Get involved</SiteLink><RepositoryLink iconOnly /><PaperLink /><a href="#top">Back to top <span aria-hidden="true">↑</span></a></nav>
   </footer>;
 }
 export function FoundationsPaper({ headingLevel = 2 }: { headingLevel?: 2 | 3 }) {

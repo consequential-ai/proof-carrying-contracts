@@ -14,6 +14,9 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
 .v2-footer p{max-width:480px;font-size:14px;color:var(--muted);margin-top:15px}
 .v2-footer nav{display:flex;justify-content:flex-end;align-items:center;gap:10px 24px;flex-wrap:wrap;font-size:14px}
 .v2-footer nav a{min-height:44px;display:inline-flex;gap:7px;align-items:center}
+.v2-header nav .repository-icon-link,.v2-footer nav .repository-icon-link{width:44px;height:44px;min-height:44px;padding:10px;justify-content:center;border:0;border-radius:4px}
+.repository-icon-link:is(:hover,:focus-visible){background:var(--surface)}
+.repository-icon-link svg,.text-link svg{flex-shrink:0}
 .v2 h1{font-size:clamp(44px,5.1vw,72px);line-height:1.08;letter-spacing:-.032em;text-wrap:pretty}
 .v2 h2{font-size:clamp(36px,3.5vw,49px);line-height:1.15;text-wrap:pretty;margin-top:15px}
 .v2 h3{font-size:23px;line-height:1.35}
