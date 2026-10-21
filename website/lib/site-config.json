@@ -2,11 +2,11 @@
   "mode": "preview",
   "siteUrl": "https://consequential-ai.github.io/proof-carrying-contracts/",
   "paper": {
-    "status": "forthcoming",
-    "title": null,
+    "status": "published",
+    "title": "Proof-Carrying Contracts: Commitments AI Agents Cannot Break",
     "authors": [],
-    "arxivUrl": null,
-    "pdfUrl": null,
+    "arxivUrl": "https://arxiv.org/abs/2610.28484",
+    "pdfUrl": "https://arxiv.org/pdf/2610.28484",
     "publishedDate": null
   },
   "implementation": {

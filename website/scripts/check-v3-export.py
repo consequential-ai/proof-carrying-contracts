@@ -103,8 +103,9 @@ for p in [*docs.keys(),*(export/'data/media/site').glob('*.svg')]:
  if p.stem=='identity':continue
  prose=Prose(p.read_text()).text
  for t in prose:
-  # Established technical terms retain their standard spelling.
-  editorial_text=re.sub(r'\b(?:multi-principal|PC2-Bench|machine-checked|held-out|self-evaluation|e-mail|sub-agents?)\b','technical term',t,flags=re.I)
+  # Published titles and established technical terms retain their exact spelling.
+  editorial_text=t.replace(config['paper']['title'],'publication title') if config['paper']['title'] else t
+  editorial_text=re.sub(r'\b(?:multi-principal|PC2-Bench|machine-checked|held-out|self-evaluation|e-mail|sub-agents?)\b','technical term',editorial_text,flags=re.I)
   if re.search(r'[-\u2010-\u2015]',editorial_text):issues.append((str(p.relative_to(export)),'dash',t))
   if re.search(r'\bnot\s+(?:just|only)\b|\brather than\b|\bnot\b[^.!?]{0,100}\bbut\b',t,re.I):issues.append((str(p.relative_to(export)),'contrast',t))
  for old in stale:

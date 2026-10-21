@@ -53,7 +53,7 @@ const involvement=renderToStaticMarkup(React.createElement(configured('@/app/get
 assert(involvement.includes('2 accepting applications · 5 upcoming'));
 for(const url of Object.values(sample.community).filter(Boolean)) assert(involvement.includes(`href="${url}"`));
 const overview=renderToStaticMarkup(React.createElement(configured('@/app/overview/page').default));
-for(const url of [sample.paper.arxivUrl,sample.paper.pdfUrl,sample.implementation.demoUrl,sample.implementation.repositoryUrl]) assert(overview.includes(`href="${url}"`));
+for(const url of [sample.paper.pdfUrl,sample.implementation.demoUrl,sample.implementation.repositoryUrl]) assert(overview.includes(`href="${url}"`));
 assert(overview.includes(sample.paper.title)); assert(!overview.includes('PC2 foundations paper (forthcoming)')); assert(overview.includes('Read the PC2 foundations paper'));
 const meta=configured('@/lib/site-data').pageMetadata('Test','Test','/positions/contract-calculi-turin');
 assert.equal(meta.alternates.canonical,'https://example.org/PC2/data/positions/contract-calculi-turin.html');

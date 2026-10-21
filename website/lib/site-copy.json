@@ -186,7 +186,7 @@
   },
   "3.5": {
     "blocks": [
-      "The paper develops the mathematical model of contracts, execution and delegation, with proofs under stated assumptions. The public preprint will be linked here when it is released.\n\nA demonstration and repository will follow, with instructions for running an initial example and examining its contract and execution."
+      "The paper develops the mathematical model of contracts, execution and delegation, with proofs under stated assumptions.\n\nA demonstration and repository will follow, with instructions for running an initial example and examining its contract and execution."
     ],
     "tables": []
   },

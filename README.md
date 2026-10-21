@@ -47,12 +47,13 @@ The deployed site is a publicly accessible draft. Its pages request
 
 [`website/lib/site-config.json`](website/lib/site-config.json) sets the public
 URL, publication mode, paper links, collaboration route and vacancy states.
-Paper and contact details are currently forthcoming, and all seven roles are
-marked upcoming.
+The foundations-paper links open the [latest arXiv PDF](https://arxiv.org/pdf/2610.28484)
+directly. A contact route is still forthcoming, and all seven roles are marked
+upcoming.
 
-Before switching `mode` to `production`, supply the approved paper title and
-arXiv URL, mark the paper published, and add a collaboration URL or contact
-email. The build validates these requirements. An open vacancy also requires
+Before switching `mode` to `production`, add a collaboration URL or contact
+email. The paper title, publication status and arXiv URLs are configured. The
+build validates these requirements. An open vacancy also requires
 its approved application URL. No dates or URLs are inferred.
 
 ## Editing
