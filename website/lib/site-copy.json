@@ -186,7 +186,7 @@
   },
   "3.5": {
     "blocks": [
-      "The paper develops the mathematical model of contracts, execution and delegation, with proofs under stated assumptions.\n\nA demonstration and repository will follow, with instructions for running an initial example and examining its contract and execution."
+      "The paper develops the mathematical model of contracts, execution and delegation, with proofs under stated assumptions.\n\nThe mechanization and code accompanying the PC2 paper are coming soon in the project repository. A demonstration will follow, with instructions for running an initial example and examining its contract and execution."
     ],
     "tables": []
   },
@@ -263,7 +263,7 @@
     "blocks": [
       "A PC2 interaction",
       "The narrated animation follows a contract from agreement through tool use to completion and payment. The sections below explain the mechanism and extend the interaction to multi-principal delegation.",
-      "The animation illustrates the protocol design. The planned demonstration and repository will provide a separate executable example."
+      "The animation illustrates the protocol design. The planned demonstration will provide a separate executable example."
     ],
     "tables": []
   },
@@ -370,8 +370,8 @@
           "Upcoming"
         ],
         [
-          "Repository",
-          "Source code and instructions for running and extending the released implementation.",
+          "Mechanization and code",
+          "Mechanization and code accompanying the PC2 paper, with instructions for building and using them.",
           "Upcoming"
         ]
       ]
@@ -497,7 +497,7 @@
       "Release announcements will appear on this website. A dedicated updates channel is being prepared.",
       "Bring a research connection, a requirement that is difficult to express, or an interaction in which agents need to rely on a commitment. Relevant discussions include contract semantics, tool interfaces, delegation and adversarial behaviour.",
       "A project contact route will be added before public launch.",
-      "The first demonstration and repository will provide examples to run, contracts and tool cases to examine, and an implementation to test under adversarial conditions. Supported contribution tasks and instructions will be published with the relevant releases.\n\nDiscussion of the paper and its assumptions is welcome before those implementation resources become available."
+      "The first implementation release will provide examples to run, contracts and tool cases to examine, and an implementation to test under adversarial conditions. Supported contribution tasks and instructions will be published with the relevant releases.\n\nDiscussion of the paper and its assumptions is welcome before those implementation resources become available."
     ],
     "tables": []
   },

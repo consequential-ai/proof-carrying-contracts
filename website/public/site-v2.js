@@ -23,7 +23,7 @@
     nav.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(false); });
     document.addEventListener('click', event => { if (!header.contains(event.target)) closeMenu(false); });
     if (typeof ResizeObserver === 'function') new ResizeObserver(updateHeight).observe(header);
-    window.addEventListener('resize', () => { if (window.innerWidth > 800) closeMenu(false); updateHeight(); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 960) closeMenu(false); updateHeight(); });
     updateHeight();
     if (location.hash) requestAnimationFrame(() => document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView());
   }

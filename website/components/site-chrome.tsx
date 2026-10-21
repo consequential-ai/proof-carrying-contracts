@@ -13,6 +13,10 @@ export function PaperLink({ local = false, className = 'text-link', down = false
     <span aria-hidden="true">{paperPublished ? '↗' : down ? '↓' : ''}</span>
   </SiteLink>;
 }
+export function RepositoryLink({ className = 'text-link', label = 'GitHub repository' }: { className?: string; label?: string }) {
+  if (!config.implementation.repositoryUrl) return null;
+  return <a className={className} href={config.implementation.repositoryUrl}>{label} <span aria-hidden="true">↗</span></a>;
+}
 export function SiteHeader({ active }: { active?: 'overview' | 'get-involved' }) {
   return <>
     <a className="skip-link" href="#main">Skip to content</a>
@@ -27,6 +31,7 @@ export function SiteHeader({ active }: { active?: 'overview' | 'get-involved' })
         <nav id="project-navigation" aria-label="Project navigation">
           <SiteLink href="/overview" aria-current={active === 'overview' ? 'page' : undefined}>Overview</SiteLink>
           <SiteLink href="/get-involved" aria-current={active === 'get-involved' ? 'page' : undefined}>Get involved</SiteLink>
+          <RepositoryLink className="nav-repository" label="GitHub" />
           <PaperLink className="nav-paper" />
         </nav>
       </div>
@@ -37,13 +42,13 @@ export function SiteFooter() {
   return <footer className="site-footer shell v2-footer">
     <div><SiteLink className="footer-brand" href="/"><AirlockMark className="brand-mark" />PC2 | Proof Carrying Contracts</SiteLink>
       <p>An academically backed initiative developing an open commitment protocol for AI agents.</p></div>
-    <nav aria-label="Footer navigation"><SiteLink href="/overview">Overview</SiteLink><SiteLink href="/get-involved">Get involved</SiteLink><PaperLink /><a href="#top">Back to top <span aria-hidden="true">↑</span></a></nav>
+    <nav aria-label="Footer navigation"><SiteLink href="/overview">Overview</SiteLink><SiteLink href="/get-involved">Get involved</SiteLink><RepositoryLink label="GitHub" /><PaperLink /><a href="#top">Back to top <span aria-hidden="true">↑</span></a></nav>
   </footer>;
 }
 export function FoundationsPaper({ headingLevel = 2 }: { headingLevel?: 2 | 3 }) {
   const Heading = headingLevel === 2 ? 'h2' : 'h3';
   const { paper, implementation } = config;
-  const bothReleased = !!implementation.demoUrl && !!implementation.repositoryUrl;
+  const bothReleased = implementation.status === 'released' && !!implementation.demoUrl && !!implementation.repositoryUrl;
   return <>
     <span id="technical-report" className="anchor-target" />
     <article className="paper-feature" aria-labelledby="paper-title">
@@ -59,7 +64,7 @@ export function FoundationsPaper({ headingLevel = 2 }: { headingLevel?: 2 | 3 })
         <div className="implementation-release"><p>{bothReleased ? 'The demonstration and repository provide instructions for running an initial example and examining its contract and execution.' : c('3.5', 0).split('\n\n')[1]}</p>
           {(implementation.demoUrl || implementation.repositoryUrl) && <div className="release-actions">
             {implementation.demoUrl ? <a className="text-link" href={implementation.demoUrl}>Explore the demonstration ↗</a> : <span>Demonstration · Upcoming</span>}
-            {implementation.repositoryUrl ? <a className="text-link" href={implementation.repositoryUrl}>View the repository ↗</a> : <span>Repository · Upcoming</span>}
+            {implementation.repositoryUrl ? <RepositoryLink /> : <span>Repository · Upcoming</span>}
           </div>}
         </div>
       </div>
