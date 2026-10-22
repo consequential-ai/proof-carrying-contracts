@@ -6,9 +6,20 @@ by Carlo Ciliberto, Alessandro Rudi, and Enrico Tassi.
 
 ## Mechanization and code
 
-The mechanization and code accompanying the PC2 paper are **coming soon**.
-They will be released in this repository, together with build and usage
-instructions.
+The Lean 4 mechanization of the paper is in [`lean/`](lean/README.md). It
+states the paper's definitions, assumptions and results and proves them, with
+no `sorry`. [`lean/Paper.lean`](lean/Paper.lean) lists the Lean statement of
+each numbered item of the paper, and checks at build time that no theorem
+depends on axioms beyond Lean's standard ones.
+
+To check it, install [elan](https://github.com/leanprover/elan), then run:
+
+```sh
+cd lean
+lake build   # Lean 4.35.0, core library only
+```
+
+Further code accompanying the paper will be released in this repository.
 
 ## Citation
 
