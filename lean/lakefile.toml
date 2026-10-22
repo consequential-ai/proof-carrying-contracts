@@ -1,0 +1,11 @@
+name = "pc2"
+defaultTargets = ["PC2", "Paper"]
+
+# The mechanization of the paper "Proof-Carrying Contracts: Commitments AI Agents Cannot Break".
+# Lean core only: no Mathlib, no Iris, no IO. Assumptions are explicit hypotheses; no `sorry`.
+[[lean_lib]]
+name = "PC2"
+
+# Every numbered item of the paper, with its Lean name; the build checks the axioms of every theorem.
+[[lean_lib]]
+name = "Paper"
