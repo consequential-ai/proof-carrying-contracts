@@ -45,7 +45,7 @@ The deployed site is a publicly accessible draft. Its pages request
 
 [`lib/site-config.json`](lib/site-config.json) sets the public URL, publication
 mode, paper links, collaboration route and vacancy states. The foundations-paper
-links open the [latest arXiv PDF](https://arxiv.org/pdf/2610.28484) directly. A
+links open the [latest arXiv PDF](https://arxiv.org/pdf/2610.28484) directly in a new tab. A
 contact route is still forthcoming, and all seven roles are marked upcoming.
 
 Before switching `mode` to `production`, add a collaboration URL or contact

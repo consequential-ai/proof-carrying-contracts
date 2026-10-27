@@ -8,7 +8,11 @@ export function Arrow({ down = false }: { down?: boolean }) {
   return <span aria-hidden="true" className="arrow">{down ? '↓' : '→'}</span>;
 }
 export function PaperLink({ local = false, className = 'text-link', down = false }: { local?: boolean; className?: string; down?: boolean }) {
-  return <SiteLink className={className} href={paperPublished ? (config.paper.pdfUrl || config.paper.arxivUrl!) : local ? '#foundations' : '/overview#foundations'}>
+  const opensPdf = paperPublished && !!config.paper.pdfUrl;
+  return <SiteLink className={className} href={paperPublished ? (config.paper.pdfUrl || config.paper.arxivUrl!) : local ? '#foundations' : '/overview#foundations'}
+    target={opensPdf ? '_blank' : undefined} rel={opensPdf ? 'noopener' : undefined}
+    title={opensPdf ? 'Opens in a new tab' : undefined}
+    aria-label={opensPdf ? 'Read the PC2 foundations paper (opens in a new tab)' : undefined}>
     <FileText size={17} strokeWidth={1.6} aria-hidden="true" />
     <span>{paperPublished ? 'Read the PC2 foundations paper' : 'PC2 foundations paper (forthcoming)'}</span>
     <span aria-hidden="true">{paperPublished ? '↗' : down ? '↓' : ''}</span>
@@ -64,7 +68,12 @@ export function FoundationsPaper({ headingLevel = 2 }: { headingLevel?: 2 | 3 })
         <p>{paperPublished ? 'The paper develops the mathematical model of contracts, execution and delegation, with proofs under stated assumptions.' : c('3.5', 0).split('\n\n')[0]}</p>
         {paperPublished && paper.authors.length > 0 && <p className="paper-authors">{paper.authors.join(', ')}</p>}
         {paperPublished && paper.publishedDate && <p><time dateTime={paper.publishedDate}>{paper.publishedDate}</time></p>}
-        {paperPublished && <div className="hero-actions"><a className="primary-link" href={paper.pdfUrl || paper.arxivUrl!}>Read the PC2 foundations paper <span aria-hidden="true">↗</span></a>{paper.pdfUrl && <a className="text-link" href={paper.pdfUrl}>Download PDF <span aria-hidden="true">↗</span></a>}</div>}
+        {paperPublished && <div className="hero-actions"><a className="primary-link" href={paper.pdfUrl || paper.arxivUrl!}
+          target={paper.pdfUrl ? '_blank' : undefined} rel={paper.pdfUrl ? 'noopener' : undefined}
+          title={paper.pdfUrl ? 'Opens in a new tab' : undefined}
+          aria-label={paper.pdfUrl ? 'Read the PC2 foundations paper (opens in a new tab)' : undefined}>
+          Read the PC2 foundations paper <span aria-hidden="true">↗</span>
+        </a>{paper.pdfUrl && <a className="text-link" href={paper.pdfUrl} target="_blank" rel="noopener" title="Opens in a new tab" aria-label="Download PDF (opens in a new tab)">Download PDF <span aria-hidden="true">↗</span></a>}</div>}
         <div className="implementation-release"><p>{bothReleased ? 'The demonstration and repository provide instructions for running an initial example and examining its contract and execution.' : c('3.5', 0).split('\n\n')[1]}</p>
           {(implementation.demoUrl || implementation.repositoryUrl) && <div className="release-actions">
             {implementation.demoUrl ? <a className="text-link" href={implementation.demoUrl}>Explore the demonstration ↗</a> : <span>Demonstration · Upcoming</span>}
