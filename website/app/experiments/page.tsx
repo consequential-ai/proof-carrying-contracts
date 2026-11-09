@@ -29,18 +29,22 @@ export default function Experiments() {
       <div className="reading-column">
         <p className="eyebrow">Evidence · Operational tasks</p>
         <h1 id="experiments-heading">Testing PC2 on payments and cargo delivery</h1>
-        <p className="lead">We wanted to test whether proof checks could prevent AI agents from violating a
-          task’s rules while still allowing them to complete the work. In one simulated assignment, agents
-          had to choose suppliers, calculate amounts owed and authorise payments through spreadsheet tools.</p>
-        <p>We compared agents using Proof Carrying Contracts (PC2) with agents using <em>ungated</em> tools.
-          PC2 requires a checked mathematical proof that the saved instructions satisfy the payment rules
-          before authorising a batch. Ungated tools can authorise the same batch without that proof.</p>
-        <p>We also tested agents that organised refrigerated cargo deliveries by sending programs to a private
-          terminal. The programs had to follow handling rules throughout the journey, even when breaking a
-          rule would not prevent the cargo from reaching its destination.</p>
-        <p>Agents using PC2 could complete useful work without the violations observed in ungated runs. Some
-          runs nevertheless left work unfinished. The results suggest that enforcing the rules and completing
-          the assignment are distinct challenges, with costs that depend on both the task and the model.</p>
+        <p className="lead">We wanted to test whether Proof Carrying Contracts (PC2) could prevent AI agents
+          from violating operational rules while still allowing them to complete useful work. Requiring a
+          proof before an action can establish that the action satisfies a formal contract. Whether agents
+          can work effectively under that requirement is a separate, empirical question.</p>
+        <p>We built two simulated assignments involving supplier payments and cargo delivery. Both required
+          agents to follow detailed rules while working through tools, with opportunities to make consequential
+          mistakes by assuming more about an action’s effects than the available information justified.</p>
+        <p>We compared agents using ungated tools with agents using PC2, where consequential actions required
+          a checked proof that they satisfied the relevant contract. We measured safety, completion and API
+          cost separately: avoiding violations would be of limited practical value if agents could do so only
+          by leaving the work unfinished.</p>
+        <p>The ungated runs produced safety violations in both settings. No violations were recorded with PC2,
+          and agents were able to complete assignments under the proof requirement. Completion nevertheless
+          varied across models and tasks, as did the effect on API cost. These results provide initial evidence
+          that proof requirements can support useful, safe execution, while leaving open the practical
+          challenge of making that execution reliable and efficient.</p>
       </div>
       <nav className="experiment-jump-links" aria-label="On this page">
         <a href="#tasks">The tasks</a><a href="#safety">Safety</a><a href="#completion">Completion</a><a href="#costs">API costs</a>
