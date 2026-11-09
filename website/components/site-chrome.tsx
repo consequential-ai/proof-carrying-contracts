@@ -25,7 +25,7 @@ export function RepositoryLink({ iconOnly = false }: { iconOnly?: boolean }) {
     {!iconOnly && <><span>GitHub repository</span><span aria-hidden="true">↗</span></>}
   </a>;
 }
-export function SiteHeader({ active }: { active?: 'overview' | 'get-involved' }) {
+export function SiteHeader({ active }: { active?: 'overview' | 'experiments' | 'get-involved' }) {
   return <>
     <a className="skip-link" href="#main">Skip to content</a>
     <header className="site-header v2-header">
@@ -38,6 +38,7 @@ export function SiteHeader({ active }: { active?: 'overview' | 'get-involved' })
         <button className="menu-toggle" type="button" aria-expanded="false" aria-controls="project-navigation">Menu <span aria-hidden="true">☰</span></button>
         <nav id="project-navigation" aria-label="Project navigation">
           <SiteLink href="/overview" aria-current={active === 'overview' ? 'page' : undefined}>Overview</SiteLink>
+          <SiteLink href="/experiments" aria-current={active === 'experiments' ? 'page' : undefined}>Evidence</SiteLink>
           <SiteLink href="/get-involved" aria-current={active === 'get-involved' ? 'page' : undefined}>Get involved</SiteLink>
           <RepositoryLink iconOnly />
           <PaperLink className="nav-paper" />
@@ -50,7 +51,7 @@ export function SiteFooter() {
   return <footer className="site-footer shell v2-footer">
     <div><SiteLink className="footer-brand" href="/"><AirlockMark className="brand-mark" />PC2 | Proof Carrying Contracts</SiteLink>
       <p>An academically backed initiative developing an open commitment protocol for AI agents.</p></div>
-    <nav aria-label="Footer navigation"><SiteLink href="/overview">Overview</SiteLink><SiteLink href="/get-involved">Get involved</SiteLink><RepositoryLink iconOnly /><PaperLink /><a href="#top">Back to top <span aria-hidden="true">↑</span></a></nav>
+    <nav aria-label="Footer navigation"><SiteLink href="/overview">Overview</SiteLink><SiteLink href="/experiments">Evidence</SiteLink><SiteLink href="/get-involved">Get involved</SiteLink><RepositoryLink iconOnly /><PaperLink /><a href="#top">Back to top <span aria-hidden="true">↑</span></a></nav>
   </footer>;
 }
 export function FoundationsPaper({ headingLevel = 2 }: { headingLevel?: 2 | 3 }) {

@@ -1,0 +1,59 @@
+.experiment-preview .experiment-scope,.experiments-page .experiment-scope{margin-top:30px;color:var(--muted);font-size:16px}
+.experiment-statistics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;padding-block:28px;margin:18px 0 0;border-block:1px solid var(--rule)}
+.experiment-statistics>div{display:flex;flex-direction:column;gap:14px}
+.experiment-statistics dt{font-size:16px;line-height:1.5}
+.experiment-statistics dd{order:-1;margin:0;font-size:56px;line-height:1.1;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.experiment-statistics dd span{font-size:30px;color:var(--muted);letter-spacing:-.015em}
+.experiment-preview-note{max-width:77ch;font-size:17px;margin-bottom:28px}
+.experiments-page>.shell{max-width:780px}
+.experiments-page .reading-column{max-width:none}
+.experiment-findings{padding-left:24px;margin-block:24px 30px}
+.experiment-findings li{padding-left:5px;margin-bottom:18px}
+.experiment-jump-links{display:flex;gap:14px 28px;flex-wrap:wrap;margin-top:28px;font-size:16px}
+.experiment-jump-links a{min-height:44px;display:flex;align-items:center;text-decoration:underline;text-underline-offset:5px}
+.experiment-figure{margin:36px 0 28px}
+.experiment-chart{border:1px solid var(--rule);background:#fff}
+.experiment-chart img{display:block;width:100%;max-width:100%;height:auto}
+.experiment-table-scroll:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.experiment-figure figcaption{margin-top:18px;font-size:15px;line-height:1.65;color:var(--muted)}
+.experiment-figure figcaption p{margin:0}
+.experiment-figure figcaption a{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:8px;color:var(--accent)}
+.experiment-explanation{max-width:780px}
+.experiment-table-scroll{overflow-x:auto;margin:32px 0 38px}
+.experiment-table{width:100%;min-width:680px;border-collapse:collapse;font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums}
+.experiment-table caption{text-align:left;font-size:17px;font-weight:550;padding-bottom:17px}
+.experiment-table th,.experiment-table td{padding:15px 16px;border-bottom:1px solid var(--rule);text-align:right;vertical-align:top}
+.experiment-table thead{background:var(--surface)}
+.experiment-table thead th{font-size:14px;font-weight:550}
+.experiment-table tr>:first-child,.experiment-table tr>:nth-child(2){text-align:left}
+.experiment-table tbody th{font-weight:550;min-width:140px}
+.experiment-table td{white-space:nowrap}
+.experiment-model-detail{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:4px}
+.experiment-reading-note{max-width:780px;font-size:16px;color:var(--muted);margin-bottom:22px}
+.experiment-methods{margin-top:30px}
+.experiment-methods .explanation{margin-top:0;border-bottom:0}
+.experiment-methods .explanation:last-child{border-bottom:1px solid var(--rule)}
+.experiment-methods .experiment-table-scroll{margin-block:24px}
+.experiment-downloads{margin-top:38px;padding:30px;background:var(--surface)}
+.experiment-downloads p{max-width:760px;font-size:17px}
+.experiment-downloads .hero-actions{font-size:16px}
+.experiment-back-link{margin-top:35px}
+@media(max-width:1180px){
+ .v2-header .header-inner{flex-wrap:wrap}
+ .v2-header nav{width:100%;justify-content:flex-start;gap:12px 25px;flex-wrap:wrap;padding-top:10px}
+ .v2-header .nav-paper{padding-left:0;border:0}
+ html[data-enhanced] .menu-toggle{display:inline-flex;align-items:center;gap:15px;margin-left:auto}
+ html[data-enhanced] .v2-header nav{display:none}
+ html[data-enhanced] .v2-header nav[data-open]{display:flex}
+ html:not([data-enhanced]){--header-height:128px}
+}
+@media(max-width:600px){
+ .experiment-statistics{grid-template-columns:1fr;gap:24px;padding-block:24px}
+ .experiment-statistics>div{display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
+ .experiment-statistics dd{order:0;font-size:42px;white-space:nowrap}
+ .experiment-statistics dd span{font-size:24px}
+ .experiment-jump-links{gap:4px 20px}
+ .experiment-table th,.experiment-table td{padding:13px 12px}
+ .experiment-downloads{padding:25px 20px}
+}
+@media(max-width:440px){html:not([data-enhanced]){--header-height:184px}}

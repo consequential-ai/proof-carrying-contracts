@@ -158,7 +158,7 @@ def build_package(destination):
         'Proof-Carrying Contracts Protocol — website draft\n\n'
         'Extract the entire ZIP, then open index.html in a modern web browser.\n'
         'Keep index.html and its data folder together. No installation or server is needed.\n'
-        'Public pages: Home, Overview, Get involved, and seven individual role descriptions.\n'
+        'Public pages: Home, Overview, Evidence, Get involved, and seven individual role descriptions.\n'
         'The narrated film is on Overview. Old protocol/positions links remain compatible.\n'
         'The unlinked identity study is for internal review only.\n'
         'The narrated video, captions, transcript, and fonts work offline.\n'

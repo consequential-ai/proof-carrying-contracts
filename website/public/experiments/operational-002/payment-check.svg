@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-labelledby="title desc">
+<title id="title">Where the payment check changes execution</title>
+<desc id="desc">The same write swaps quotation and beneficiary identifiers. The ungated path can release those stored values. The PC2 path requires an observation and a proof for that exact revision; a mismatch prevents release and the agent can repair the sheet.</desc>
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7" fill="none" stroke="#64717b"/></marker></defs>
+<rect width="900" height="620" fill="white"/>
+<g font-family="Arial, sans-serif" fill="#24313a">
+<text x="40" y="43" font-size="23" font-weight="700">A write acknowledgement does not establish payment authority</text>
+<text x="40" y="72" font-size="15" fill="#56616b">Schematic of the procurement task · illustrative identifiers</text>
+<rect x="40" y="101" width="350" height="106" rx="5" fill="#f6f7f7" stroke="#ccd3d6"/>
+<text x="59" y="130" font-size="16" font-weight="700">The agent submits</text>
+<text x="59" y="159" font-size="17">Quotation: Q17</text><text x="59" y="185" font-size="17">Beneficiary: B04</text>
+<rect x="510" y="101" width="350" height="106" rx="5" fill="#f6f7f7" stroke="#ccd3d6"/>
+<text x="529" y="130" font-size="16" font-weight="700">The worksheet stores</text>
+<text x="529" y="159" font-size="17">Quotation: B04</text><text x="529" y="185" font-size="17">Beneficiary: Q17</text>
+<path d="M398 152H499" stroke="#64717b" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="450" y="137" text-anchor="middle" font-size="13" fill="#56616b">Importer swaps</text>
+<text x="450" y="177" text-anchor="middle" font-size="13" fill="#56616b">the two fields</text>
+<text x="450" y="245" text-anchor="middle" font-size="16">The acknowledgement returns a row count and revision, without the stored values.</text>
+<path d="M450 263V282H226V300" fill="none" stroke="#64717b" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M450 282H674V300" fill="none" stroke="#64717b" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="40" y="310" width="372" height="260" rx="5" fill="#fdf8f6" stroke="#BB593B"/>
+<rect x="488" y="310" width="372" height="260" rx="5" fill="#f3f8fa" stroke="#246B8A"/>
+<text x="62" y="346" font-size="20" font-weight="700" fill="#a64e34">Ungated tools</text>
+<text x="62" y="380" font-size="16">Payment can be released without</text>
+<text x="62" y="405" font-size="16">checking the stored instructions.</text>
+<path d="M226 425V458" stroke="#64717b" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="62" y="492" font-size="17" font-weight="700">The incorrect instruction executes.</text>
+<text x="62" y="527" font-size="15">A later correction cannot undo the release.</text>
+<text x="510" y="346" font-size="20" font-weight="700" fill="#246B8A">Proof-gated tools</text>
+<text x="510" y="380" font-size="16">Read the current revision and construct</text>
+<text x="510" y="405" font-size="16">a proof for the proposed payment.</text>
+<path d="M674 425V458" stroke="#64717b" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="510" y="492" font-size="17" font-weight="700">A mismatch prevents release.</text>
+<text x="510" y="527" font-size="15">Repair, observe again, then prove and release.</text>
+<text x="40" y="601" font-size="14" fill="#56616b">Ungated agents can also inspect and repair the worksheet; the difference is whether the check is enforced.</text>
+</g></svg>

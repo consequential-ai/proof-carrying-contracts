@@ -31,6 +31,7 @@ prefix. The primary page URLs are:
 
 - `/proof-carrying-contracts/`
 - `/proof-carrying-contracts/data/overview.html`
+- `/proof-carrying-contracts/data/experiments.html`
 - `/proof-carrying-contracts/data/get-involved.html`
 - `/proof-carrying-contracts/data/positions/<role>.html`
 
@@ -59,6 +60,7 @@ its approved application URL. No dates or URLs are inferred.
 | --- | --- |
 | `lib/site-copy.json` | Website text |
 | `lib/site-config.json` | Publication and vacancy configuration |
+| `lib/operational-results.json` | Aggregate measurements used by the experiment pages |
 | `app/` | Pages and styles |
 | `components/` | Shared page components |
 | `public/` | Retained media and logos |
@@ -68,6 +70,25 @@ its approved application URL. No dates or URLs are inferred.
 local references, accessibility markup, specified text contrast combinations,
 release states, chapter timing and TypeScript. It runs without a preview server
 or access to the original local repository.
+
+The homepage introduces the Evidence page after the research programme.
+`app/experiments/page.tsx` describes the two tasks, followed by observations about
+safety, completion and API costs. The navigation label is Evidence; the existing
+`/data/experiments.html` URL is retained. The page uses seven SVG figures in
+`public/experiments/operational-002/`. This snapshot contains 160 selected runs:
+the original Luna/Astra cohorts and the completed Terra/Sol timing rerun. Each
+family has separate safety and completion plots in percentages, and API-cost
+plots in dollars. Safe completion
+means goal completion without a recorded violation, independently of budget and
+receipt formatting. API costs price recorded token usage at standard rates on
+7 November 2026; they are not account invoice totals. Detailed measurement files
+and earlier snapshots remain in the benchmark checkout rather than the public page.
+
+The figures and aggregate data are generated in the local benchmark checkout by
+`python -m pc2_evaluation.plot_operational_report --website <this-website-directory>`.
+After exporting the site, `python3 scripts/prepare-pages.py` stages the local
+preview and `python3 scripts/package-experiments.py` creates the self-contained
+`outputs/pc2-experiments.html` file for sharing.
 
 The repository's existing [license](../LICENSE) is retained. Bundled font and icon licenses
 are in `scripts/static-licenses/` and are included in the deployed files.

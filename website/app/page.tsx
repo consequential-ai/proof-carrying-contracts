@@ -3,6 +3,7 @@ import { SiteLink } from '@/components/site-link';
 import { SiteHeader, SiteFooter, Arrow, FoundationsPaper, PaperLink } from '@/components/site-chrome';
 import { HomeIllustration } from '@/components/site-figures';
 import { Paragraphs } from '@/components/copy';
+import { ExperimentPreview } from '@/components/experiment-preview';
 import { c, table } from '@/lib/site-data';
 
 const institutions = [
@@ -38,6 +39,7 @@ export default function Home() {
       <div className="research-rows">{table('3.4').map(([number,title,text])=><article className="research-row" key={number}><div><span className="row-number">{number}</span><h3>{title}</h3></div><p>{text}</p></article>)}</div>
       <SiteLink className="text-link" href="/overview#research">{c('3.4',2)} <Arrow /></SiteLink>
     </section>
+    <ExperimentPreview />
     <section className="v2-section shell paper-section" id="foundations" aria-label="PC2 foundations paper"><FoundationsPaper /></section>
     <section className="v2-section shell" id="consortium" aria-labelledby="consortium-title"><div className="section-intro"><p className="eyebrow">Research consortium</p><h2 id="consortium-title">{c('3.6',0)}</h2><Paragraphs text={c('3.6',1)} /></div>
       <div className="institution-grid">{institutions.map(([name,image,css,label,href])=><a href={href} className={`institution ${css}`} key={name}><div className="logo-slot"><img src={`/logos/${image}`} alt={name} loading="lazy" /></div><span>{label}</span></a>)}</div>

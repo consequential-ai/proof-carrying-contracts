@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Source_Serif_4 } from 'next/font/google';
 import './globals.css';
 import './site-v2.css';
+import './experiments.css';
 import { pageMetadata } from '@/lib/site-data';
 const sans = Geist({ variable: '--font-sans', subsets: ['latin'] });
 const serif = Source_Serif_4({
