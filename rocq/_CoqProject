@@ -1,0 +1,19 @@
+-Q PC2 PC2
+-arg -w -arg -notation-overridden
+
+PC2/Basic.v
+PC2/Airlock.v
+PC2/Execution.v
+PC2/Compliance.v
+PC2/Completion.v
+PC2/Standard.v
+PC2/World.v
+PC2/Isolation.v
+PC2/Guarantees.v
+PC2/Modules.v
+PC2/Appendix/WP.v
+PC2/Appendix/Control.v
+PC2/Appendix/Gaps.v
+PC2/Appendix/Ledger.v
+PC2/Examples/Travel.v
+PC2/All.v

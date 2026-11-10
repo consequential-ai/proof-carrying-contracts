@@ -1,0 +1,12 @@
+*.vo
+*.vos
+*.vok
+*.glob
+*.aux
+.*.aux
+.*.cache
+.lia.cache
+Makefile.rocq
+Makefile.rocq.conf
+.Makefile.rocq.d
+Paper.log
