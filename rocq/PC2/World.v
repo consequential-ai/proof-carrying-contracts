@@ -40,7 +40,7 @@ Definition Adequacy {S : Type} (K : Contract S) {W : Type} (ρ : W -> S -> Prop)
 
 (** **A6 (Adequacy)**, second part: a world described by a state where the goal
 holds satisfies the goal in the world. *)
-Definition GoalAdequacy {S W : Type} (ρ : W -> S -> Prop) (Goal : S -> Prop)
+Definition GoalAdequacy {S W : Type} (ρ : W -> S -> Prop) (Goal : pred S)
     (GoalW : W -> Prop) : Prop :=
   forall w s, ρ w s -> Goal s -> GoalW w.
 

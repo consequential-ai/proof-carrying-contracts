@@ -73,7 +73,8 @@ move=> hI h; case: h (h) hI => {}x;
   by move=> s' hs [hne|ha'];
     [rewrite hx in hne | exact: (initializer hK hin ha' hs)].
 - move=> x₂ {}inp q _ _ _ _ _ _ hN hI.
-  have [hx ha [hlast /andP[_ hk] [v₀ hv hacc]]] := call_facts (inv_wf hI) hN.
+  have [hx ha /checkOKP[hlast /andP[_ hk] [v₀ hv hacc]]] :=
+    call_facts (inv_wf hI) hN.
   have [sv [hvs has hcs hw]] := window hI hx ha hlast hk hv.
   have [hen hall] := hA1 _ _ hacc sv (record x) has ha hvs hcs hw.
   by split=> // s' hs _; exact: hall.

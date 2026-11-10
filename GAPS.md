@@ -65,6 +65,18 @@ about the prose, not about missing proofs.
 - **Fix:** add a lemma (for a bijection `e : ι' -> ι`, `tensor (M \o e) (sel \o e)` has the same
   models as `tensor M sel` up to `e`). Or mark the sentence as an informal remark.
 
+## Axioms (Lean only)
+
+- **Claimed:** `lean/Paper.lean:9` says that no result relies on an axiom beyond Lean's standard
+  ones. That is true.
+- **Not used:** none of the results needs `Classical.choice`. Even so, seven of them depend on it:
+  `anytime_compliance`, `completion`, `world_safety`, `completion_in_world` and the three
+  `guarantees*`.
+- **Cause:** two tactic steps.
+  - `omega` closes a goal that is not arithmetic (`Compliance.lean:179`, `World.lean:68`).
+  - A `by_cases` splits on tool names, which have no `DecidableEq` (`Completion.lean:145`).
+- **Fix:** see `LOGIC.md`, "Axioms in Lean". The Rocq results depend on no axiom.
+
 ## Checked, not gaps
 
 - **App. D, "every result of the paper applies to [𝒦']"** (`rocq/PC2/Appendix/Gaps.v:5`,

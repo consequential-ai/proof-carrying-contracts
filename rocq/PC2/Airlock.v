@@ -27,8 +27,9 @@ Import Contract.
 
 Module Checker.
 
-(** The checker, abstractly: which proofs it accepts for which statements. *)
-Record t (P : Type) := Build { accepts : P -> Prop -> Prop }.
+(** The checker, abstractly: which proofs it accepts for which statements. A
+checker is an algorithm: acceptance is a test. *)
+Record t (P : Type) := Build { accepts : P -> Prop -> bool }.
 
 (** **A1 (Sound checking).** If the checker accepts [π] as a proof of [Φ], then
 [Φ] holds. *)
@@ -118,10 +119,25 @@ Definition start (s₀ : S) : Vars := MkVars s₀ [::] 0 None None VNone Init.
 iteration [kl] of the last call and the index [k] of the last published view.
 The views [v] it reads have only grown since it started. *)
 Definition checkOK (q : Request) (kl : option nat) (k : nat) (v : seq (V K)) :
-  Prop :=
-  [/\ ltl kl (k₀ q), k₀ q <= k <= k₀ q + allow q &
-      exists2 v₀, onth v (k₀ q) = Some v₀ &
-        Checker.accepts ch (π q) (OblN K (allow q) (call q) v₀)].
+  bool :=
+  [&& ltl kl (k₀ q), k₀ q <= k <= k₀ q + allow q &
+      if onth v (k₀ q) is Some v₀ then
+        Checker.accepts ch (π q) (OblN K (allow q) (call q) v₀)
+      else false].
+
+Lemma checkOKP (q : Request) (kl : option nat) (k : nat) (v : seq (V K)) :
+  reflect
+    [/\ ltl kl (k₀ q), k₀ q <= k <= k₀ q + allow q &
+        exists2 v₀, onth v (k₀ q) = Some v₀ &
+          Checker.accepts ch (π q) (OblN K (allow q) (call q) v₀)]
+    (checkOK q kl k v).
+Proof.
+rewrite /checkOK; case: (onth v (k₀ q)) => [v₀|];
+  apply: (iffP and3P) => -[h1 h2 h3]; split=> //.
+- by exists v₀.
+- by case: h3 => v₁ [<-].
+- by case: h3 => v₁.
+Qed.
 
 (** Line 5: [v[k] ← read_view(); publish_view(k, v[k])]. *)
 Definition publish (x : Vars) : Vars :=
@@ -283,7 +299,7 @@ move=> hC h; case: h hC => [y //|y q kl k hq hr hok hC|y q kl k _ _ _];
   last by split.
 split=> // _.
 have [q' hq' [hkl hk]] := chk_computing hC hr.
-case: hok => hlast /andP[hk₀ _] [v₀ hv hacc]; rewrite hkl in hlast.
+case/checkOKP: hok => hlast /andP[hk₀ _] [v₀ hv hacc]; rewrite hkl in hlast.
 by exists q, v₀; split=> //; exact: leq_trans hk.
 Qed.
 
@@ -342,7 +358,7 @@ case: h eo hW => // {}x x₂ {}inp q' hx ha hc hq hr hk [->] hW.
 have := chk_correct (chk_step hW hx hc) hr.
 case: (step_eq hc) hq hk => rq [r ->] /= -> hk
   [_ [v₀ [[<-] hlast hk₀ hv hacc]]].
-by split=> //; split=> //; [rewrite hk₀ | exists v₀].
+by split=> //; apply/checkOKP; split=> //; [rewrite hk₀ | exists v₀].
 Qed.
 
 (** **The call discipline of A4 (iii) follows from Algorithms 1 and 2.** A call
@@ -386,6 +402,7 @@ Arguments publish {S K P} x.
 Arguments setVerdict {S K P} x r.
 Arguments receive {S K P} inp x.
 Arguments checkOK {S} K {P} ch q kl k v.
+Arguments checkOKP {S} K {P} ch q kl k v.
 Arguments Complete {S} K {P} ch _ _.
 Arguments Next {S} K {P} ch πK _ _ _ _.
 Arguments Reach {S} K {P} ch πK s₀ _.

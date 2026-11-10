@@ -157,13 +157,13 @@ Local Abbreviation Sp := (forall k, S (M k)).
 
 (** The contract, for a clause, a view and an inactivity test on the combined
 state. *)
-Definition contract (C : Sp -> Prop) (V : Type) (view : Sp -> V)
+Definition contract (C : pred Sp) (V : Type) (view : Sp -> V)
     (stop : Sp -> bool) : Contract Sp :=
   @Contract.Build Sp C V view (Name X) (fun l => tensor M (sel X l))
     (fun s s' => Tool.D (tensor M (selCtrl X)) (ctrlInp X) s s') stop.
 
 (** Its effects in the combined system. *)
-Definition effects (C : Sp -> Prop) (V : Type) (view : Sp -> V)
+Definition effects (C : pred Sp) (V : Type) (view : Sp -> V)
     (stop : Sp -> bool) : Effects (contract C view stop) Wp :=
   @Effects.Build _ (contract C view stop) _
     (fun c => effT X (projT1 c) (projT2 c)) (effCtrl X).
@@ -171,7 +171,7 @@ Definition effects (C : Sp -> Prop) (V : Type) (view : Sp -> V)
 (** **Theorem 6 for a contract built from modules.** With compatible effects,
 local coverage of every module tool gives A2, and local fidelity gives the first
 line of A5, for the contract's tools and its control step. *)
-Theorem local_to_global (C : Sp -> Prop) (V : Type) (view : Sp -> V)
+Theorem local_to_global (C : pred Sp) (V : Type) (view : Sp -> V)
     (stop : Sp -> bool) :
   (forall l, Compatible M (sel X l) (effT X l)) ->
   Compatible M (selCtrl X)
@@ -186,7 +186,7 @@ apply: (local_to_global_cov _ _ hcompC (fun k => hcov k _) (ctrlInp X)
 by exists w, w'.
 Qed.
 
-Theorem local_to_global_fidelity (C : Sp -> Prop) (V : Type) (view : Sp -> V)
+Theorem local_to_global_fidelity (C : pred Sp) (V : Type) (view : Sp -> V)
     (stop : Sp -> bool) :
   (forall l, Compatible M (sel X l) (effT X l)) ->
   Compatible M (selCtrl X)
@@ -220,7 +220,7 @@ End Composite.
 
 (** A precondition keeps local coverage (§6.4): the restricted model is enabled
 only where the original one is, and agrees with it there. *)
-Lemma cov_restrict {S W : Type} (T : Tool S) (Pre : Tool.Inp T -> S -> Prop)
+Lemma cov_restrict {S W : Type} (T : Tool S) (Pre : Tool.Inp T -> pred S)
     (eff : Eff (Tool.Inp T) W S) :
   (forall i s s', Tool.En T i s -> (exists w w', eff i w s w' s') ->
     Tool.D T i s s') ->
@@ -231,7 +231,7 @@ by move=> h i s s' /Tool.en_restrict[hp hen'] he; split=> //; exact: h.
 Qed.
 
 (** A precondition keeps local fidelity (§6.4). *)
-Lemma fid_restrict {S W : Type} (T : Tool S) (Pre : Tool.Inp T -> S -> Prop)
+Lemma fid_restrict {S W : Type} (T : Tool S) (Pre : Tool.Inp T -> pred S)
     (eff : Eff (Tool.Inp T) W S) (ρ : W -> S -> Prop) :
   (forall i w s w' s', ρ w s -> Tool.En T i s -> eff i w s w' s' -> ρ w' s') ->
   forall i w s w' s', ρ w s -> Tool.En (Tool.restrict T Pre) i s ->
@@ -282,8 +282,8 @@ Lemma ext_retained (M : CapModule) (Z : Type) (ρ' : W M -> S M -> Z -> Prop)
       ρ' w' sz'.1 sz'.2) ->
     Fid (ext M Z ρ' N new effNew effOld) (inl l)).
 Proof.
-split=> [hcov i sz sz' [s'' hs''] [w [w' he]]|hfid hρ' i w sz w' sz' hρ
-  [s'' hs''] he].
+split=> [hcov i sz sz' [s'' hs''] [w [w' he]]|
+         hfid hρ' i w sz w' sz' hρ [s'' hs''] he].
   have [he₁ hz] := hproj i w sz w' sz' he.
   by split=> //; apply: hcov; [exists s''.1; exact: hs''.1 | exists w, w'].
 have [he₁ _] := hproj i w sz w' sz' he.
@@ -413,7 +413,7 @@ Theorem domain_invariant (M : CapModule) (π : W M -> S M) (Kinv : W M -> Prop)
     (M2 : forall l i w s w' s', Tool.En (tools M l) i s -> Kinv w ->
       eff M l i w s w' s' -> Kinv w') :
   (forall l, Fid M l) /\
-  forall (C : S M -> Prop) (Safe : W M -> Prop),
+  forall (C : pred (S M)) (Safe : W M -> Prop),
     (forall w, Kinv w -> C (π w) -> Safe w) ->
     forall w s, ρ M w s -> C s -> Safe w.
 Proof.

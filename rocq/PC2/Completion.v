@@ -36,7 +36,8 @@ Module StandardForm.
 
 (** **Standard form (Example 1).** The facts about a contract that Theorem 2
 uses, on the models: the label [lab] (held by the Airlock) is [Ongoing] exactly
-on the active states; the settlement tool's model is the goal as a precondition
+on the active states; the goal, [Ready] and [End] are tests; the settlement
+tool's model is the goal as a precondition
 on [free_settle], which can only settle; the other tools leave the label
 unchanged; from [Pending], control makes the contract ongoing only from a
 [Ready] state and otherwise leaves it pending or void; from [Ongoing], control
@@ -49,9 +50,9 @@ settle → lab s' = lab s] without the case analysis on whether a tool is
 settlement, which needs no decidable names here. *)
 Record t (S : Type) (K : Contract S) := Build {
   lab : S -> Label;
-  active_iff : forall s, Active K s <-> lab s = Ongoing;
+  activeE : forall s, Active K s = (lab s == Ongoing);
   settle : Name K;
-  Goal : S -> Prop;
+  Goal : pred S;
   freeD : Call K -> S -> S -> Prop;
   settle_model : forall c : Call K, projT1 c = settle ->
     forall s s', D K c s s' <-> Goal s /\ freeD c s s';
@@ -59,11 +60,11 @@ Record t (S : Type) (K : Contract S) := Build {
     forall s s', freeD c s s' -> lab s' = lab s \/ lab s' = Settled;
   tools_label : forall (c : Call K) s s', D K c s s' ->
     lab s' = lab s \/ projT1 c = settle;
-  Ready : S -> Prop;
-  Ends : S -> Prop;
+  Ready : pred S;
+  Ends : pred S;
   ctrl_pending : forall s s', lab s = Pending -> ctrl K s s' ->
     [\/ lab s' = Ongoing /\ Ready s, lab s' = Pending |
-        lab s' = Void /\ ~ Ready s];
+        lab s' = Void /\ ~~ Ready s];
   ctrl_ongoing : forall s s', lab s = Ongoing -> ctrl K s s' ->
     lab s' = Ongoing \/ (lab s' = Terminated /\ Ends s);
 }.
@@ -152,8 +153,8 @@ rewrite (next_record hn); case: (eqVneq (phase x') Init) => [hinit|/eqP hne].
   split; first by move=> _ j p /onth1P[_ <-].
     by case: (ctrl_pending F _ _ hpend hD) => [[-> _]|->|[-> _]].
   by case: (ctrl_pending F _ _ hpend hD) => [[-> _]|->|[-> _]].
-have hon : lab F (record x') = Ongoing :=
-  (active_iff F _).1 (next_active hn hne).
+have hon : lab F (record x') = Ongoing.
+  by apply/eqP; rewrite -activeE; exact: next_active hn hne.
 case: o hn hD he hen => [|q] hn hD he _.
   (* a control step from an ongoing state *)
   case: (ctrl_ongoing F _ _ hon hD) => [->|[-> hE]]; first by split=> //; case.
@@ -188,7 +189,7 @@ admissible at every compliant active state where the goal holds. Under A3, for
 every view [v] and delay [n], the delayed obligation of settlement is the goal
 at every active state of the window of every compliant active state with the
 view [v]. *)
-Theorem settle_obligation (hK : Cert K) (Goal : S -> Prop)
+Theorem settle_obligation (hK : Cert K) (Goal : pred S)
     (freeD : S -> S -> Prop) (c : Call K)
     (hmodel : forall s s', D K c s s' <-> Goal s /\ freeD s s')
     (hfree : forall s, Active K s -> C K s -> Goal s -> wp freeD (C K) s)
@@ -209,7 +210,7 @@ Arguments settle_obligation : clear implicits.
 
 (** The settlement obligation (§3.5.2, Eq. settlement-obligation): with no
 control step, the goal at every compliant active state with the view. *)
-Theorem settle_obligation_zero (hK : Cert K) (Goal : S -> Prop)
+Theorem settle_obligation_zero (hK : Cert K) (Goal : pred S)
     (freeD : S -> S -> Prop) (c : Call K)
     (hmodel : forall s s', D K c s s' <-> Goal s /\ freeD s s')
     (hfree : forall s, Active K s -> C K s -> Goal s -> wp freeD (C K) s)
@@ -225,18 +226,18 @@ Qed.
 Arguments settle_obligation_zero : clear implicits.
 
 (** When the view determines the goal, settling is exactly the goal (§3.5.2). *)
-Theorem settle_obligation_view (hK : Cert K) (Goal : S -> Prop)
+Theorem settle_obligation_view (hK : Cert K) (Goal : pred S)
     (freeD : S -> S -> Prop) (c : Call K)
     (hmodel : forall s s', D K c s s' <-> Goal s /\ freeD s s')
     (hfree : forall s, Active K s -> C K s -> Goal s -> wp freeD (C K) s)
-    (hview : forall s s', view K s = view K s' -> (Goal s <-> Goal s'))
+    (hview : forall s s', view K s = view K s' -> Goal s = Goal s')
     {s : S} :
   Active K s -> C K s -> (Obl K c (view K s) <-> Goal s).
 Proof.
 move=> ha hc; have hZ :=
   settle_obligation_zero hK Goal freeD c hmodel hfree (view K s).
 split=> [/hZ h|hg]; first exact: h s ha hc (erefl _).
-by apply/hZ => s' _ _ hv; exact: (hview s' s hv).2 hg.
+by apply/hZ => s' _ _ hv; rewrite (hview s' s hv).
 Qed.
 
 Arguments settle_obligation_view : clear implicits.
@@ -250,21 +251,16 @@ Arguments settle_obligation_view {S K} hK Goal freeD c hmodel hfree hview
 
 
 (** **The communication tool of §3.5.2.** A tool [send (d, r)] whose model only
-adds [(d, r)] to the record of disclosures, under the clause that disclosures
-stay within [Allowed], where the state space admits the updated record: at a
-compliant state its admissibility is exactly [(d, r) ∈ Allowed]. *)
-Theorem send_adm {S M : Type} (Sent : S -> M -> Prop) (Allowed : M -> Prop)
+adds [m = (d, r)] to the record of disclosures [sent], under the clause that
+disclosures stay within [Allowed], where the state space admits the updated
+record: at a compliant state its admissibility is exactly [(d, r) ∈ Allowed]. *)
+Theorem send_adm {S M : Type} (sent : S -> seq M) (Allowed : pred M)
     (m : M) (s : S) :
-  (exists s', forall y, Sent s' y <-> Sent s y \/ y = m) ->
-  (forall y, Sent s y -> Allowed y) ->
-  (wp (fun s s' => (forall y, Sent s y -> Sent s' y) /\
-        (forall y, Sent s' y -> Sent s y \/ y = m))
-      (fun s => forall y, Sent s y -> Allowed y) s <-> Allowed m).
+  (exists s', sent s' = m :: sent s) -> all Allowed (sent s) ->
+  wp (fun s s' => sent s' = m :: sent s) (fun s => all Allowed (sent s)) s <->
+    Allowed m.
 Proof.
-move=> [s' hs'] hc; have hupd : (forall y, Sent s y -> Sent s' y) /\
-    (forall y, Sent s' y -> Sent s y \/ y = m).
-  by split=> y hy; [apply/hs'; left | apply/hs'].
-split=> [[_ hall]|hm]; first by apply: (hall s' hupd); apply/hs'; right.
-split; first by exists s'.
-by move=> s'' [_ hsub] y /hsub[/hc //|->].
+move=> [s' hs'] hc; split=> [[_ /(_ s' hs')]|hm].
+  by rewrite hs' /= => /andP[].
+by split=> [|s'' ->]; [exists s' | rewrite /= hm hc].
 Qed.

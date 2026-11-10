@@ -42,6 +42,10 @@ Print Assumptions Contract.oblN_zero.
 (* Example 1 (the standard contract) *)
 Check @Standard.Spec.contract.
 
+(* Example 1: the clause, while the contract is ongoing *)
+Check @Standard.Spec.CP.
+Print Assumptions Standard.Spec.CP.
+
 (* Example 1: A3 for every contract built on the template *)
 Check @Standard.Spec.cert.
 Print Assumptions Standard.Spec.cert.
@@ -52,8 +56,10 @@ Check @Next.
 (* Algorithm 1, line 6: what the agent's channel gives *)
 Check @Input.
 
-(* Algorithm 2, check *)
+(* Algorithm 2, check, a test, and what it says *)
 Check @checkOK.
+Check @checkOKP.
+Print Assumptions checkOKP.
 
 (* §3.5.2 Settlement obligation *)
 Check @settle_obligation_zero.
@@ -266,6 +272,14 @@ Print Assumptions Design.cert.
 Check @ComputeBudget.contract.
 Check @ComputeBudget.design.
 
+(* Its clause and its models, as tests, and what they say *)
+Check @ComputeBudget.CP.
+Print Assumptions ComputeBudget.CP.
+Check @ComputeBudget.idleP.
+Print Assumptions ComputeBudget.idleP.
+Check @ComputeBudget.shutP.
+Print Assumptions ComputeBudget.shutP.
+
 (* The compute budget *)
 Check @ComputeBudget.sound.
 Print Assumptions ComputeBudget.sound.
@@ -348,6 +362,11 @@ Print Assumptions isolation_stepwise.
 Check @Travel.spec.
 Check @Travel.B.
 Check @Travel.Goal.
+
+(* Outside changes, as a test, and what it says *)
+Check @Travel.out.
+Check @Travel.outP.
+Print Assumptions Travel.outP.
 
 (* The travel contract satisfies A3 *)
 Check @Travel.cert.

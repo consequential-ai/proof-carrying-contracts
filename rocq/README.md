@@ -17,7 +17,9 @@ number in `Paper.v`.
 Build: `make` (with `rocq` and MathComp on the path, e.g. after `eval $(opam env)`).
 
 Where a docstring says more than its statement proves, the gap is recorded in
-[`../GAPS.md`](../GAPS.md), for this mechanization and the Lean one.
+[`../GAPS.md`](../GAPS.md), for this mechanization and the Lean one. Which facts are tests and
+which are propositions, and which axioms each mechanization uses, is in
+[`../LOGIC.md`](../LOGIC.md).
 
 ## Map
 
@@ -59,17 +61,36 @@ representation:
 - **Only settlement changes the label** (standard form) is stated as "a call keeps the label, or is
   settlement", which is Lean's "a call other than settlement keeps the label" without assuming that
   one can decide whether a tool is settlement.
-- **Decidable tests are booleans**, used as propositions through `is_true`. `Active K s` is
-  `~~ stop K s`, and "inactive" is `stop K s` (Lean's `¬ K.Active s`). The test of Algorithm 1,
-  line 9, is the boolean `authorized`. The verdict phases and the travel contract's visa and escrow
-  have an `eqType`. The travel contract's constraints `B` and goal `Goal` are boolean tests, so the
-  facts about the states of Fig. 2 are proved by computation. App. A's decidable gate *reflects* the
-  obligation (`reflect (OblN K n c v) (g c n v)`).
+- **Tests are booleans**, used as propositions through `is_true`. These are:
+  - the clause `C`;
+  - the standard contract's constraints `B` and goal `Goal`;
+  - the tests `Ready` and `Ends` of the standard form;
+  - the preconditions `Pre` of `T|Pre`;
+  - the checker's acceptance (a checker is an algorithm), and with it Algorithm 2's `checkOK` and
+    the test `authorized` of Algorithm 1, line 9.
+
+  Lean takes these as `Prop`, so the Rocq theorems are stated for decidable clauses, goals,
+  preconditions and checkers. No proof needs this restriction. No type parameter is required to
+  have an `eqType`; `==` is used only on the labels, the phases, and the travel contract's own
+  types.
+
+  Other boolean forms:
+  - `Active K s` is `~~ stop K s`, and "inactive" is `stop K s` (Lean's `¬ K.Active s`).
+  - The standard form's `activeE` is an equation `Active K s = (lab s == Ongoing)`.
+  - The concrete models that are decidable are tests too: the compute budget's `idle` and `shut`
+    (with the time waited `time s' - time s`), and the travel contract's outside changes `out`.
+    Reflection lemmas (`checkOKP`, `idleP`, `shutP`, `outP`, `CP`) give back the paper's
+    formulation.
+  - The facts about the states of Fig. 2 are proved by computation.
+  - App. A's decidable gate *reflects* the obligation (`reflect (OblN K n c v) (g c n v)`).
+  - In `send_adm` the record of disclosures is a list, and `send` puts the new entry in front.
+
+  Models of tools and of control, effects, and facts about the world stay propositions.
 - **Conjunctions** of three to five parts are written `[/\ a, b & c]` (and `[\/ a, b | c]` for
   disjunctions), and two-sided bounds are chained (`k₀ q <= k <= k₀ q + allow q`). What a step of
   Algorithm 1 leaves unchanged is an equation of variables (`complete_eq`, `step_eq`), not a
-  conjunction of field equalities. Outside changes in the travel contract are a record (`out`) with
-  named fields.
+  conjunction of field equalities. Outside changes in the travel contract are read, through
+  `outP`, as a record (`Out`) with named fields.
 - **Sums** are MathComp big operators: App. E sums with `\sum_(j <- ids) f j` and uses `leq_sum`.
 - **Names.** Records live in modules (`Tool.t`, `Contract.t`, `Effects.t`, `StandardForm.t`,
   `CapModule.t`, `System.t`), so the Lean names stay (`Tool.adm_iff`, `Contract.OblN`,

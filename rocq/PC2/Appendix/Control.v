@@ -116,27 +116,60 @@ Variables (B d p : nat).
 within the budget, at every instant, closing included; while the contract is
 ongoing, the time is within the deadline. The reserve [r * h] is for the budget:
 the jobs are charged until they have stopped. *)
-Definition C (s : St) : Prop :=
-  b s + r s * h s <= B /\ (ℓ s = Ongoing -> time s <= d).
+Definition C (s : St) : bool :=
+  (b s + r s * h s <= B) && ((ℓ s == Ongoing) ==> (time s <= d)).
+
+Lemma CP (s : St) :
+  reflect (b s + r s * h s <= B /\ (ℓ s = Ongoing -> time s <= d)) (C s).
+Proof.
+apply: (iffP andP) => -[h1 h2]; split=> //; first by move/eqP; exact: implyP.
+by apply/implyP => /eqP; exact: h2.
+Qed.
 
 (** The waiting tests, which certify [C_idle]: one more period, and a shutdown
 after it, stay within the budget and before the deadline. *)
 Definition waitOK (s : St) : bool :=
   (b s + r s * (p + h s) <= B) && (time s + p + h s <= d).
 
-(** Outside changes during [u ≤ p] units of waiting: the bill rises at most at
-rate [r], jobs may stop, time advances; the label is kept. *)
-Definition idle (s s' : St) : Prop :=
-  exists u, u <= p /\
-    [/\ b s' <= b s + r s * u, r s' <= r s, h s' <= h s, time s' = time s + u
-      & ℓ s' = ℓ s].
+(** Outside changes while waiting at most [p]: the bill rises at most at rate
+[r], jobs may stop, time advances; the label is kept. The time waited is
+[time s' - time s]. *)
+Definition idle (s s' : St) : bool :=
+  [&& time s <= time s' <= time s + p,
+      b s' <= b s + r s * (time s' - time s), r s' <= r s, h s' <= h s
+    & ℓ s' == ℓ s].
 
-(** Stopping the jobs, after [u ≤ h] units: the bill rises at most at rate [r],
-the allowance counts down. *)
-Definition shut (s s' : St) : Prop :=
-  exists u, u <= h s /\
+(** [idle], as in App. C: some wait [u ≤ p]. *)
+Lemma idleP (s s' : St) :
+  reflect (exists u, u <= p /\
+    [/\ b s' <= b s + r s * u, r s' <= r s, h s' <= h s, time s' = time s + u
+      & ℓ s' = ℓ s])
+    (idle s s').
+Proof.
+apply: (iffP and5P) => [[/andP[h1 h2] hb hr hh /eqP hl]|
+                        [u [hu [hb hr hh -> hl]]]].
+  by exists (time s' - time s); rewrite leq_subLR (subnKC h1).
+by rewrite addKn leq_addr leq_add2l hu hl eqxx.
+Qed.
+
+(** Stopping the jobs, within the allowance [h]: the bill rises at most at rate
+[r], the allowance counts down by the time taken. *)
+Definition shut (s s' : St) : bool :=
+  [&& time s <= time s' <= time s + h s,
+      b s' <= b s + r s * (time s' - time s), r s' <= r s
+    & h s' <= h s - (time s' - time s)].
+
+(** [shut], as in App. C: some duration [u ≤ h]. *)
+Lemma shutP (s s' : St) :
+  reflect (exists u, u <= h s /\
     [/\ b s' <= b s + r s * u, r s' <= r s, h s' <= h s - u
-      & time s' = time s + u].
+      & time s' = time s + u])
+    (shut s s').
+Proof.
+apply: (iffP and4P) => [[/andP[h1 h2] hb hr hh]|[u [hu [hb hr hh ->]]]].
+  by exists (time s' - time s); rewrite leq_subLR (subnKC h1).
+by rewrite addKn leq_addr leq_add2l hu.
+Qed.
 
 (** The compute-budget contract: no tool for the agent, the clause [C]; the
 control step is the design's. *)
@@ -152,7 +185,8 @@ Definition design : Design.t contract :=
   Design.Build (fun s => waitOK s && (ℓ s == Pending)) (fun s => ~~ waitOK s)
     (fun s => time s + p + h s <= d)
     (fun s s' => s' = s \/ s' = MkSt (b s) (r s) (h s) (time s) Ongoing)
-    (fun s s' => s' = s) idle (fun s s' => shut s s' /\ ℓ s' = Ongoing)
+    (fun s s' => s' = s) (fun s s' => idle s s')
+    (fun s s' => shut s s' /\ ℓ s' = Ongoing)
     (fun s s' => s' = s \/ (ℓ s' = Terminated /\ shut s s')).
 
 (** Stopping the jobs keeps the bill, with the remaining reserve, within its
@@ -160,7 +194,7 @@ starting bound, and takes at most the allowance. *)
 Lemma shut_C {s s' : St} :
   shut s s' -> b s' + r s' * h s' <= b s + r s * h s /\ time s' <= time s + h s.
 Proof.
-case=> u [hu [hb hr hh ht]]; split; last by rewrite ht leq_add2l.
+case/shutP=> u [hu [hb hr hh ht]]; split; last by rewrite ht leq_add2l.
 apply: leq_trans (leq_add hb (leq_mul hr hh)) _.
 by rewrite -addnA -mulnDr subnKC.
 Qed.
@@ -171,26 +205,27 @@ Theorem sound : Design.Sound design.
 Proof.
 split.
 - move=> s _ hc /negPn /andP[hb hd].
-  split; first by exists s, 0; rewrite muln0; do !split=> //; lia.
-  move=> s' [u [hu [hb' hr' hh' ht' hl]]].
+  split; first by exists s; apply/idleP; exists 0; rewrite muln0;
+    do !split=> //; lia.
+  move=> s' /idleP[u [hu [hb' hr' hh' ht' hl]]].
   have h1 : r s' * h s' <= r s * h s := leq_mul hr' hh'.
   have h2 : r s * u <= r s * p := leq_mul (leqnn _) hu.
   have h3 : r s * (p + h s) = r s * p + r s * h s := mulnDr _ _ _.
-  by split=> [|_]; lia.
+  by apply/CP; split=> [|_]; lia.
 - move=> s ha hc _ /= hd.
   have hon : ℓ s = Ongoing by move: ha; rewrite /Active /= negbK => /eqP.
-  split; first by exists s; split=> //; exists 0; rewrite muln0;
+  split; first by exists s; split=> //; apply/shutP; exists 0; rewrite muln0;
     do !split=> //; lia.
   move=> s' [hs _]; have [hb' ht'] := shut_C hs.
-  by case: hc => hc _; split=> [|_]; lia.
+  by move/CP: hc => -[hc _]; apply/CP; split=> [|_]; lia.
 - move=> s _ hc _ _; split; first by exists s; left.
   move=> s' [->|[hl hs]] //; have [hb' _] := shut_C hs.
-  by case: hc => hc _; split=> [|]; [lia | rewrite hl].
+  by move/CP: hc => -[hc _]; apply/CP; split=> [|]; [lia | rewrite hl].
 - move=> s _ /andP[/andP[hb hd] /eqP hp].
   split; first by exists s; left.
   move=> s' [->|->] ha'; first by move: ha'; rewrite /Active /= hp.
   have h3 : r s * (p + h s) = r s * p + r s * h s := mulnDr _ _ _.
-  by split=> [/=|/= _]; lia.
+  by apply/CP; split=> [/=|/= _]; lia.
 - move=> s hin _; split; first by exists s.
   by move=> s' ->.
 Qed.

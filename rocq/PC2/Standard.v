@@ -51,17 +51,17 @@ Arguments Dx {X} _ i _ _.
 Arguments dur {X} _ i.
 
 (** What a standard contract is made of: the view of the task part; the business
-constraints, the goal, the deadline; the task tools; what releasing the escrow
-does to the task part; initialization: where control may start the contract (a
-decidable test), what starting does, and how long it takes, and what not
-starting does; outside changes to the task part while control waits, and the
+constraints and the goal (tests), the deadline; the task tools; what releasing
+the escrow does to the task part; initialization: where control may start the
+contract (a decidable test), what starting does, and how long it takes, and what
+not starting does; outside changes to the task part while control waits, and the
 idle period; the task's own termination conditions (a decidable test), and what
 refunding does. *)
 Record Spec (X : Type) := MkSpec {
   VX : Type;
   viewX : X -> VX;
-  B : X -> Prop;
-  Goal : X -> Prop;
+  B : pred X;
+  Goal : pred X;
   d : nat;
   N : Type;
   tasks : N -> Task X;
@@ -160,18 +160,29 @@ Definition tools (l : Name (N sp)) : Tool (St X) :=
 (** **Example 1, the standard contract**, with a deadline. *)
 Definition contract : Contract (St X) :=
   @Contract.Build (St X)
-    (fun s => (B sp (task s) /\ time s <= d sp) \/ label s <> Ongoing)
+    (fun s => B sp (task s) && (time s <= d sp) || (label s != Ongoing))
     (VX sp * nat * Label)
     (fun s => (viewX sp (task s), time s, label s))
     (Name (N sp)) tools ctrl
     (fun s => label s != Ongoing).
 
-Lemma active_iff (s : St X) : Contract.Active contract s <-> label s = Ongoing.
-Proof. by rewrite /Contract.Active /=; case: (label s). Qed.
+Lemma activeE (s : St X) :
+  Contract.Active contract s = (label s == Ongoing).
+Proof. by rewrite /Contract.Active negbK. Qed.
 
-Lemma C_iff {s : St X} : label s = Ongoing ->
-  (Contract.C contract s <-> B sp (task s) /\ time s <= d sp).
-Proof. by move=> h /=; rewrite h; split=> [[//|//]|]; left. Qed.
+Lemma activeP {s : St X} :
+  reflect (label s = Ongoing) (Contract.Active contract s).
+Proof. by rewrite activeE; exact: eqP. Qed.
+
+(** While the contract is ongoing, the clause is the business constraints and
+the deadline. *)
+Lemma CE {s : St X} : label s = Ongoing ->
+  Contract.C contract s = B sp (task s) && (time s <= d sp).
+Proof. by move=> h /=; rewrite h orbF. Qed.
+
+Lemma CP {s : St X} : label s = Ongoing ->
+  reflect (B sp (task s) /\ time s <= d sp) (Contract.C contract s).
+Proof. by move=> h; rewrite (CE h); exact: andP. Qed.
 
 (** The design obligations of the template: starting from [Ready] lands in the
 clause, and outside changes while waiting keep the business constraints (and may
@@ -189,22 +200,21 @@ closes the contract at once. *)
 Theorem cert (hD : Design) : Contract.Cert contract.
 Proof.
 split.
-- move=> s ha hc; have hℓ := (active_iff s).1 ha.
-  have [hB ht] := (C_iff hℓ).1 hc.
+- move=> s /activeP hℓ hc; have /(CP hℓ)[hB ht] := hc.
   rewrite /wp /= /ctrl hℓ; case hact: (Act s).
     split; first by exists s; left.
-    by move=> s' [->|[hl _]] //; right; rewrite hl.
+    by move=> s' [->|[hl _]] //; rewrite hl orbT.
   move/negbT: hact; rewrite negb_or -leqNgt => /andP[htp _].
   split; first by exists s; split=> //;
     [rewrite leqnn leq_addr | exact: out_refl hD _].
-  move=> s' [_ /andP[_ ht'] ho]; left; split; first exact: out_B hD _ _ hB ho.
-  exact: leq_trans ht' htp.
-- move=> s s' /= hin ha'; have hℓ' := (active_iff s').1 ha'.
+  move=> s' [_ /andP[_ ht'] ho].
+  by rewrite (out_B hD _ _ hB ho) (leq_trans ht' htp).
+- move=> s s' /= hin /activeP hℓ'.
   rewrite /ctrl; case hs₀: (label s) hin => //= _;
     try by move=> hss; move: hℓ'; rewrite hss hs₀.
   case hr: (Ready sp (task s) (time s)) => /= hs.
     case: hs => [[hl _]|[_ [hi ht]]]; first by rewrite hl in hℓ'.
-    by left; exact: init_ok hD _ _ _ _ hr hi ht.
+    by have [-> ->] := init_ok hD _ _ _ _ hr hi ht.
   by case: hs => [hss|[hl _]]; [move: hℓ'; rewrite hss hs₀ | rewrite hl in hℓ'].
 - move=> s /= hin; rewrite /ctrl; case hs₀: (label s) hin => //= _;
     try by exists s.
@@ -241,7 +251,7 @@ Proof. by case: c => [[l|] i] /= => [[hl _]|_]; [left | right]. Qed.
 Lemma sf_ctrl_pending (s s' : St X) :
   label s = Pending -> Contract.ctrl contract s s' ->
   [\/ label s' = Ongoing /\ Ready sp (task s) (time s), label s' = Pending |
-      label s' = Void /\ ~ Ready sp (task s) (time s)].
+      label s' = Void /\ ~~ Ready sp (task s) (time s)].
 Proof.
 move=> hp; rewrite /= /ctrl hp.
 case hr: (Ready sp (task s) (time s)) => /= hs.
@@ -261,7 +271,7 @@ Qed.
 (** **The standard contract is in standard form.** *)
 Definition standardForm : StandardForm contract := {|
   StandardForm.lab := label;
-  StandardForm.active_iff := active_iff;
+  StandardForm.activeE := activeE;
   StandardForm.settle := NSettle;
   StandardForm.Goal s := Goal sp (task s);
   StandardForm.freeD := freeD;
@@ -287,7 +297,7 @@ Proof.
 apply: (Completion.settle_obligation (cert hD) (fun s => Goal sp (task s))
   settleD (existT _ NSettle tt) (D_settle tt)).
 move=> s _ hc _; split; first by exists s; left.
-by move=> s' [->|[hl _]] //; right; rewrite hl.
+by move=> s' [->|[hl _]] //; rewrite /= hl orbT.
 Qed.
 
 (** Outside changes over any number of idle periods. *)
@@ -310,7 +320,7 @@ have hmul (a : nat) :
   by move=> h; apply: (leq_trans h); rewrite leq_add2l leq_mul2r leqnSn orbT.
 case=> [hw|[u [hu hw hc]]] ha'.
   by have [h1 /andP[h2 h3] h4] := ih _ hw ha'; split=> //; rewrite h2 hmul.
-have huℓ := (active_iff u).1 hu.
+have/activeP huℓ := hu.
 have [h1 /andP[h2 h3] h4] := ih _ hw huℓ.
 move: hc; rewrite /= /ctrl huℓ; case hact: (Act u) => /= hc.
   case: hc => [hus|[hl _]]; last by rewrite hl in ha'.
@@ -333,17 +343,17 @@ Theorem oblN_task (hD : Design) {n : nat} {l : N sp} {i : Inp (tasks sp l)}
   Contract.OblN contract n (existT _ (NTask l) i) (vx, t, Ongoing).
 Proof.
 move=> htime hB hen s s' ha ha' hv hc hw.
-have hℓ' := (active_iff s').1 ha'.
+have/activeP hℓ' := ha'.
 have [hℓ /andP[hts ht'] hout] := win_bound hw hℓ'.
 move: hv => /= [hvx hts₀ _].
-have hBs := ((C_iff hℓ).1 hc).1.
-have hBs' := ((C_iff hℓ').1 (Contract.win_C (cert hD) hc hw)).1.
+have /(CP hℓ)[hBs _] := hc.
+have /(CP hℓ')[hBs' _] := Contract.win_C (cert hD) hc hw.
 have [x₂ hx₂] := hen (task s').
 split.
   by exists (MkSt x₂ (time s') (label s')); split=> //=; rewrite leqnn leq_addr.
-move=> s'' [hl /andP[_ ht''] hd]; left; split;
-  first exact: hB _ _ _ hvx hBs hout hBs' hd.
-apply: leq_trans ht'' (leq_trans _ htime); rewrite leq_add2r -hts₀; exact: ht'.
+move=> s'' [hl /andP[_ ht''] hd]; rewrite /= (hB _ _ _ hvx hBs hout hBs' hd) /=.
+apply/orP; left; apply: leq_trans ht'' (leq_trans _ htime).
+by rewrite leq_add2r -hts₀.
 Qed.
 
 (** **A task call that can break the business constraints is rejected**: if,
@@ -353,34 +363,35 @@ proof is accepted. *)
 Theorem not_oblN_task {n : nat} {l : N sp} {i : Inp (tasks sp l)}
     {vx : VX sp} {t : nat} :
   t <= d sp -> forall x x₂ : X, viewX sp x = vx -> B sp x ->
-  Dx (tasks sp l) i x x₂ -> ~ B sp x₂ ->
+  Dx (tasks sp l) i x x₂ -> ~~ B sp x₂ ->
   ~ Contract.OblN contract n (existT _ (NTask l) i) (vx, t, Ongoing).
 Proof.
 move=> ht x x₂ hv hB hd hB₂ h.
-have ha : Contract.Active contract (MkSt x t Ongoing) by apply/active_iff.
+have ha : Contract.Active contract (MkSt x t Ongoing) by apply/activeP.
 have hv' : Contract.view contract (MkSt x t Ongoing) = (vx, t, Ongoing)
   by rewrite /= hv.
-have hadm := h _ _ ha ha hv' (or_introl (conj hB ht)) Contract.win_refl.
+have hc : Contract.C contract (MkSt x t Ongoing) by rewrite /= hB ht.
+have hadm := h _ _ ha ha hv' hc Contract.win_refl.
 have hD' : Contract.D contract (existT _ (NTask l) i) (MkSt x t Ongoing)
     (MkSt x₂ t Ongoing).
   by split=> //=; rewrite leqnn leq_addr.
-by case: (hadm.2 _ hD') => [[/hB₂]|[]].
+by move: (hadm.2 _ hD'); rewrite /= (negbTE hB₂).
 Qed.
 
 (** **Settling before the goal holds is rejected**: if some compliant task part
 with the view [vx] does not satisfy the goal, the settlement obligation is
 false, whatever the allowance. *)
 Theorem not_oblN_settle {n : nat} {vx : VX sp} {t : nat} :
-  t <= d sp -> forall x : X, viewX sp x = vx -> B sp x -> ~ Goal sp x ->
+  t <= d sp -> forall x : X, viewX sp x = vx -> B sp x -> ~~ Goal sp x ->
   ~ Contract.OblN contract n (existT _ NSettle tt) (vx, t, Ongoing).
 Proof.
 move=> ht x hv hB hG h.
-have ha : Contract.Active contract (MkSt x t Ongoing) by apply/active_iff.
+have ha : Contract.Active contract (MkSt x t Ongoing) by apply/activeP.
 have hv' : Contract.view contract (MkSt x t Ongoing) = (vx, t, Ongoing)
   by rewrite /= hv.
-have [[s'' [hg _]] _] :=
-  h _ _ ha ha hv' (or_introl (conj hB ht)) Contract.win_refl.
-exact: hG hg.
+have hc : Contract.C contract (MkSt x t Ongoing) by rewrite /= hB ht.
+have [[s'' [hg _]] _] := h _ _ ha ha hv' hc Contract.win_refl.
+by rewrite hg in hG.
 Qed.
 
 (** **Settling once the goal holds**: at a view [(vx, t, ongoing)], if every
@@ -392,17 +403,17 @@ Theorem oblN_settle (hD : Design) {n : nat} {vx : VX sp} {t : nat} :
 Proof.
 move=> hG; apply/(settle_obligation hD n (vx, t, Ongoing)).
 move=> s s' _ ha' hv hc hw.
-have hℓ' := (active_iff s').1 ha'.
+have/activeP hℓ' := ha'.
 have [hℓ _ hout] := win_bound hw hℓ'.
-move: hv => /= [hvx _ _].
-exact: hG _ _ hvx ((C_iff hℓ).1 hc).1 hout.
+move: hv => /= [hvx _ _]; have /(CP hℓ)[hB _] := hc.
+exact: hG _ _ hvx hB hout.
 Qed.
 
 (** The standard contract keeps its clock within the deadline while it is
 active. *)
 Lemma deadline_clause (s : St X) :
   Contract.Active contract s -> Contract.C contract s -> time s <= d sp.
-Proof. by move=> ha hc; exact: ((C_iff ((active_iff s).1 ha)).1 hc).2. Qed.
+Proof. by move=> /activeP hℓ /(CP hℓ)[]. Qed.
 
 End Spec.
 
@@ -414,8 +425,10 @@ Arguments Act {X} sp s.
 Arguments ctrl {X} sp s s'.
 Arguments tools {X} sp l.
 Arguments contract {X} sp.
-Arguments active_iff {X} sp s.
-Arguments C_iff {X} sp {s} _.
+Arguments activeE {X} sp s.
+Arguments activeP {X} sp {s}.
+Arguments CE {X} sp {s} _.
+Arguments CP {X} sp {s} _.
 Arguments Design {X} sp.
 Arguments cert {X} sp hD.
 Arguments D_task {X} sp l i s s'.

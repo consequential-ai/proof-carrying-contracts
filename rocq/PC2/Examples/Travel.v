@@ -104,7 +104,7 @@ Definition Goal (x : X) : bool :=
 
 (** **Outside changes**: mail may arrive, and the consulate may decide on the
 visa; nothing else changes. *)
-Record out (x x' : X) : Prop := Out {
+Record Out (x x' : X) : Prop := MkOut {
   out_spent : spent x' = spent x;
   out_discl : discl x' = discl x;
   out_booked : booked x' = booked x;
@@ -121,6 +121,22 @@ Arguments out_ratings {x x'} _.
 Arguments out_escrow {x x'} _.
 Arguments out_inbox {x x'} _.
 Arguments out_visa {x x'} _.
+
+(** Outside changes, as a test. *)
+Definition out (x x' : X) : bool :=
+  [&& spent x' == spent x, discl x' == discl x, booked x' == booked x,
+      ratings x' == ratings x
+    & [&& escrow x' == escrow x, prefix (inbox x) (inbox x')
+        & (visa x == VPending) || (visa x' == visa x)]].
+
+Lemma outP (x x' : X) : reflect (Out x x') (out x x').
+Proof.
+apply: (iffP idP) => [|[hs hd hb hr he /prefixP hi hv]].
+  case/and5P=> /eqP hs /eqP hd /eqP hb /eqP hr /and3P[/eqP he /prefixP hi hv].
+  by split=> //; case/orP: hv => /eqP; [left | right].
+rewrite /out hs hd hb hr he hi !eqxx /=.
+by case: hv => ->; rewrite eqxx ?orbT.
+Qed.
 
 (** The tools of the task. *)
 Inductive N := Rate | Book | DownloadMail | SendPassport.
@@ -166,16 +182,17 @@ the whole task part (the passport's contents are not part of it); control checks
 every minute, and terminates at the deadline or upon visa refusal, refunding the
 escrow. *)
 Definition spec : Spec X :=
-  MkSpec X id (fun x => B x) (fun x => Goal x) deadline N tasks
-    (fun x x' => x' = with_escrow x Paid) readyX (fun x x' => x' = x) 60
-    (fun x x' => x' = x) out 60 (fun x => visa x == Refused)
-    (fun x x' => x' = with_escrow x Refunded).
+  MkSpec X id B Goal deadline N tasks (fun x x' => x' = with_escrow x Paid)
+    readyX (fun x x' => x' = x) 60 (fun x x' => x' = x) (fun x x' => out x x')
+    60 (fun x => visa x == Refused) (fun x x' => x' = with_escrow x Refunded).
 
 Lemma out_refl (x : X) : out x x.
-Proof. by split=> //; [exists [::]; rewrite cats0 | right]. Qed.
+Proof. by rewrite /out !eqxx prefix_refl orbT. Qed.
 
 Lemma out_B {x x' : X} : B x -> out x x' -> B x'.
-Proof. by move=> hB [hs hd hb hr _ _ _]; rewrite /B /rating hs hd hb hr. Qed.
+Proof.
+by move=> hB /outP[hs hd hb hr _ _ _]; rewrite /B /rating hs hd hb hr.
+Qed.
 
 (** **The design obligations hold**, so the travel contract satisfies A3
 ([Spec.cert]). *)
@@ -204,12 +221,13 @@ Lemma outStar_fields {x x' : X} :
   [/\ spent x' = spent x, discl x' = discl x, booked x' = booked x
     & ratings x' = ratings x].
 Proof.
-by elim=> // y z w _ [h1 h2 h3 h4] [hs hd hb hr _ _ _]; rewrite hs hd hb hr.
+by elim=> // y z w _ [h1 h2 h3 h4] /outP[hs hd hb hr _ _ _];
+  rewrite hs hd hb hr.
 Qed.
 
 Lemma outStar_goal {x x' : X} : Goal x -> Spec.OutStar spec x x' -> Goal x'.
 Proof.
-move=> hG h; elim: h hG => // y z w _ ih [_ _ hb _ _ _ hv]
+move=> hG h; elim: h hG => // y z w _ ih /outP[_ _ hb _ _ _ hv]
   /ih /andP[hbk /eqP hvis].
 by rewrite /Goal hb hbk /=; case: hv => hv;
   [rewrite hvis in hv | rewrite hv hvis].
@@ -225,7 +243,7 @@ Theorem rate_memo {x x' : X} {h : string} :
   h \in unzip1 (ratings x) -> Dx (tasks Rate) h x x' ->
     rating x' h = rating x h.
 Proof.
-move=> hrated [y [hy ho]]; have hr := out_ratings ho.
+move=> hrated [y [hy /outP ho]]; have hr := out_ratings ho.
 case: hy => [hyx|[_ [hnot _]]]; first by rewrite /rating hr hyx.
 by rewrite hrated in hnot.
 Qed.

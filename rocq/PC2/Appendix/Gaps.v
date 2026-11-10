@@ -44,7 +44,7 @@ by split=> [[_ [z [hz _]]]|[z hz]]; [exists z | exists z, z].
 Qed.
 
 (** [(T|Pre)' = T'|Pre]: a goal-gated settlement stays goal-gated. *)
-Lemma extend_restrict (Pre : Tool.Inp T -> S -> Prop) (i : Tool.Inp T)
+Lemma extend_restrict (Pre : Tool.Inp T -> pred S) (i : Tool.Inp T)
     (s s'' : S) :
   Tool.D (extend (Tool.restrict T Pre) gap) i s s'' <->
   Tool.D (Tool.restrict (extend T gap) Pre) i s s''.

@@ -4,9 +4,11 @@ Definitions 1–4 of the paper, admissibility (Eqs. 1–3) as a weakest precondi
 (App. A), the precondition construction (§3.5.2), and A3 as the statement of the
 certificate the Airlock checks before it starts (Algorithm 1, line 2).
 
-A predicate on [X] is a function [X -> Prop], a relation a function [X -> Y ->
-Prop]; a decidable test is a function to [bool], used as a predicate through
-[is_true]. *)
+A test is a function to [bool]: the clause, the business constraints, the goal,
+preconditions and the tests of control are tests ([pred S]), used as
+propositions through [is_true]. Models of tools and of control are relations
+[S -> S -> Prop]; facts that quantify over states are propositions. See
+LOGIC.md. *)
 
 From mathcomp Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq.
 
@@ -52,12 +54,12 @@ Arguments onth_rcons_all {A} Q {l a} _ _ _ _ _.
 
 (** The relational weakest precondition (App. A): from [s], the relation [R]
 admits some outcome, and every outcome satisfies [Q]. *)
-Definition wp {S : Type} (R : S -> S -> Prop) (Q : S -> Prop) (s : S) : Prop :=
+Definition wp {S : Type} (R : S -> S -> Prop) (Q : pred S) (s : S) : Prop :=
   (exists s', R s s') /\ forall s', R s s' -> Q s'.
 
 (** A weakest precondition computed through an equivalent description of the
 relation. *)
-Lemma wp_of_iff {S : Type} {R : S -> S -> Prop} {Q : S -> Prop} {s : S}
+Lemma wp_of_iff {S : Type} {R : S -> S -> Prop} {Q : pred S} {s : S}
     {R' : S -> Prop} :
   (forall s', R s s' <-> R' s') ->
   (exists s', R' s') /\ (forall s', R' s' -> Q s') -> wp R Q s.
@@ -90,25 +92,25 @@ Definition En T (i : Inp T) (s : S) : Prop := exists s', D T i s s'.
 
 (** Daemonic control [Θ_T(i,s)] (Eq. 1): every state the model admits satisfies
 [C]. *)
-Definition Dem T (C : S -> Prop) (i : Inp T) (s : S) : Prop :=
+Definition Dem T (C : pred S) (i : Inp T) (s : S) : Prop :=
   forall s', D T i s s' -> C s'.
 
 (** Admissibility [𝒜_T(i,s)] (Eq. 3), the weakest precondition of the model for
 [C]. *)
-Definition Adm T (C : S -> Prop) (i : Inp T) (s : S) : Prop := wp (D T i) C s.
+Definition Adm T (C : pred S) (i : Inp T) (s : S) : Prop := wp (D T i) C s.
 
 (** [𝒜_T = Ξ_T ∧ Θ_T], by definition. *)
-Lemma adm_iff T (C : S -> Prop) (i : Inp T) (s : S) :
+Lemma adm_iff T (C : pred S) (i : Inp T) (s : S) :
   Adm T C i s <-> En T i s /\ Dem T C i s.
 Proof. by []. Qed.
 
 (** **The precondition construction** [T|_Pre] (§3.5.2): same input and routine,
 the model restricted to the starting states where [Pre] holds. *)
-Definition restrict T (Pre : Inp T -> S -> Prop) : t S :=
+Definition restrict T (Pre : Inp T -> pred S) : t S :=
   @Build S (Inp T) (fun i s s' => Pre i s /\ D T i s s').
 
 (** [Ξ_{T|Pre}(i,s) ⟺ Pre(i,s) ∧ Ξ_T(i,s)] (§3.5.2). *)
-Lemma en_restrict T (Pre : Inp T -> S -> Prop) (i : Inp T) (s : S) :
+Lemma en_restrict T (Pre : Inp T -> pred S) (i : Inp T) (s : S) :
   En (restrict T Pre) i s <-> Pre i s /\ En T i s.
 Proof.
 by split=> [[s' [hp hd]]|[hp [s' hd]]]; [split=> //; exists s' | exists s'].
@@ -117,7 +119,7 @@ Qed.
 (** Under a precondition, admissibility is the precondition and the original
 admissibility; this is the obligation of Eq. (precondition-obligation) at each
 state (§3.5.2). *)
-Lemma adm_restrict T (C : S -> Prop) (Pre : Inp T -> S -> Prop) (i : Inp T)
+Lemma adm_restrict T (C : pred S) (Pre : Inp T -> pred S) (i : Inp T)
     (s : S) :
   Adm (restrict T Pre) C i s <-> Pre i s /\ Adm T C i s.
 Proof.
@@ -147,7 +149,7 @@ by name), the model of the control tool ([ctrl], which has no input and is
 reserved for the Airlock), and the decidable inactivity test [stop]. A contract
 fixes no initial state. *)
 Record t (S : Type) := Build {
-  C : S -> Prop;
+  C : pred S;
   V : Type;
   view : S -> V;
   Name : Type;
