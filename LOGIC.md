@@ -66,6 +66,29 @@ needs this: it is a modelling choice, matching the algorithms, which evaluate th
 mechanization takes `Prop` predicates, so its theorems are more general on this point. Each of its
 uses on a decidable predicate, as in the travel example, comes with a `DecidablePred` instance.
 
+## The Airlock as a program (Rocq only)
+
+Because every test of Algorithms 1–2 is a boolean, Algorithm 1 is a function once two inputs
+are given: the agent's input, and Algorithm 2's progress at each iteration (`CheckEv`: the
+check is still busy, or it has finished). This turns the parallel checker into an oracle; the
+loop reads the verdict only at line 9, so the oracle covers every interleaving.
+
+`rocq/PC2/Program.v` defines the iteration `step` and the run `run`, and proves that they
+implement the relations of `rocq/PC2/Airlock.v`:
+- `nextP` relates `step` and `Next` in both directions;
+- `run_sound`/`run_complete` relate `run` and `Run`;
+- `reach_run` relates `run` and `Reach`.
+
+The program returns the same continuations as the relation, so no functional extensionality is
+needed. An example computes a run of the compute-budget contract.
+
+The Lean mechanization has no counterpart. There, the checker's acceptance is a proposition
+(`accepts : P → Prop → Prop`, `lean/PC2/Airlock.lean:41`), and so is what Algorithm 2's check
+computes, so an executable step would first need acceptance to be decidable. Running the program
+outside Rocq, by extraction, would need more in both mechanizations:
+- the statements the checker reads would have to be data, not propositions;
+- the state, the views and the calls would have to be concrete types.
+
 ## Why Lean derives `DecidableEq`
 
 Lean derives `DecidableEq` on six types. Each instance has a use:

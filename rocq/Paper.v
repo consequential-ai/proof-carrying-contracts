@@ -403,3 +403,39 @@ Print Assumptions Travel.ep4_premature.
 (* Episode 4: settling once the goal holds is admissible *)
 Check @Travel.ep4_settle.
 Print Assumptions Travel.ep4_settle.
+
+(** ** Rocq only: Algorithms 1–2 as programs (no Lean counterpart)
+
+[PC2/Program.v] implements Algorithm 1, with Algorithm 2's progress as an input,
+as the function [step], and its runs as [run], and proves that they implement
+the relations [Next], [Run] and [Reach] above. *)
+
+(* Algorithm 2's progress at an iteration, and what the verdict becomes *)
+Check @CheckEv.
+Check @complete.
+Check @completeP.
+Print Assumptions completeP.
+
+(* Algorithm 1, one iteration, and its correctness *)
+Check @step.
+Check @step_sound.
+Print Assumptions step_sound.
+Check @step_complete.
+Print Assumptions step_complete.
+Check @nextP.
+Print Assumptions nextP.
+
+(* Runs *)
+Check @run.
+Check @run_sound.
+Print Assumptions run_sound.
+Check @run_complete.
+Print Assumptions run_complete.
+Check @reach_run.
+Print Assumptions reach_run.
+
+(* The call discipline and no veto, for the program *)
+Check @step_call_discipline.
+Print Assumptions step_call_discipline.
+Check @step_no_veto.
+Print Assumptions step_no_veto.

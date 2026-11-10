@@ -40,6 +40,7 @@ which are propositions, and which axioms each mechanization uses, is in
 | App. D: time between operations | `PC2/Appendix/Gaps.v` | `extend`, `extendK` |
 | App. E: payment ledger, booking confirmations | `PC2/Appendix/Ledger.v` | `budget_correspondence`, `booking_correspondence` |
 | Table 1 and Fig. 2: the travel contract | `PC2/Examples/Travel.v` | `Travel.cert`, `ep1_book_rejected`, …, `ep4_settle` |
+| Algorithms 1–2 as programs (Rocq only) | `PC2/Program.v` | `step`, `run`, `nextP`, `run_sound`, `run_complete`, `reach_run` |
 
 ## How the paper is read
 
@@ -101,6 +102,12 @@ representation:
   they do not clash with a request's call and the contract's control step. Lemma names start with a
   lowercase letter (`reach_wf`, `exec_reach`, `coverage_op`, `prefix_trans`), and the two reach
   relations of App. G are one `reachBy` for two step relations.
+- **An executable Airlock** (Rocq only; the Lean mechanization has no counterpart).
+  `PC2/Program.v` implements Algorithm 1 as a function `step` and its runs as `run`, and proves
+  that they implement the relations `Next`, `Run` and `Reach`. The function takes as inputs the
+  agent's input, Algorithm 2's progress at the iteration (`CheckEv`: still busy, or done), and
+  the reading each operation returns. The file is separate from the specification: no other
+  file depends on it.
 - **Function equality** is never used: where Lean rewrites with an equality of step relations
   (`refStep_agent`), the Rocq proof transports prefixes along an implication between them.
 
