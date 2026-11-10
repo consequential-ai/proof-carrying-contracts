@@ -89,6 +89,9 @@ outside Rocq, by extraction, would need more in both mechanizations:
 - the statements the checker reads would have to be data, not propositions;
 - the state, the views and the calls would have to be concrete types.
 
+`SAFE_CHECK.md` sketches how MetaRocq could do this for Rocq. Statements become quoted terms, and
+the checker becomes MetaRocq's verified SafeChecker.
+
 ## Why Lean derives `DecidableEq`
 
 Lean derives `DecidableEq` on six types. Each instance has a use:
