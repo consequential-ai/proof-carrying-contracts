@@ -19,6 +19,17 @@ cd lean
 lake build   # Lean 4.35.0, core library only
 ```
 
+A Rocq mechanization with the same structure is in [`rocq/`](rocq/README.md), built on
+MathComp, with no axioms at all. [`rocq/Paper.v`](rocq/Paper.v) lists the Rocq
+statement of each numbered item, and the build checks that each is closed under the
+global context. To check it, install Rocq 9.2, `rocq-stdlib`, `rocq-mathcomp-boot`
+and `rocq-mathcomp-zify` (e.g. with opam), then run:
+
+```sh
+cd rocq
+make
+```
+
 Further code accompanying the paper will be released in this repository.
 
 ## Citation
