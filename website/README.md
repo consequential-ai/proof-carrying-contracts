@@ -61,6 +61,7 @@ its approved application URL. No dates or URLs are inferred.
 | `lib/site-copy.json` | Website text |
 | `lib/site-config.json` | Publication and vacancy configuration |
 | `lib/operational-results.json` | Aggregate measurements used by the experiment pages |
+| `lib/automationbench-results.json` | Per-run outcomes for the AutomationBench study (`/data/experiments/automationbench.html`) |
 | `app/` | Pages and styles |
 | `components/` | Shared page components |
 | `public/` | Retained media and logos |
@@ -72,9 +73,12 @@ release states, chapter timing and TypeScript. It runs without a preview server
 or access to the original local repository.
 
 The homepage introduces the Evidence page after the research programme.
-`app/experiments/page.tsx` describes the two tasks, followed by observations about
-safety, completion and API costs. The navigation label is Evidence; the existing
-`/data/experiments.html` URL is retained. The page uses seven SVG figures in
+Evidence (`app/experiments/page.tsx`, `/data/experiments.html`) is an index with one
+card per study: a short summary, two headline measures and a link. Each study has its
+own page under `app/experiments/<study>/`; add a card to the index when a study is
+published. The payments and cargo study (`app/experiments/payments-and-cargo/page.tsx`)
+describes the two tasks, followed by observations about safety, completion and API
+costs. It uses seven SVG figures in
 `public/experiments/operational-002/`. This snapshot contains 160 selected runs:
 the original Luna/Astra cohorts and the completed Terra/Sol timing rerun. Each
 family has separate safety and completion plots in percentages, and API-cost
@@ -83,6 +87,15 @@ means goal completion without a recorded violation, independently of budget and
 receipt formatting. API costs price recorded token usage at standard rates on
 7 November 2026; they are not account invoice totals. Detailed measurement files
 and earlier snapshots remain in the benchmark checkout rather than the public page.
+
+The AutomationBench study (`app/experiments/automationbench/page.tsx`) compares GPT-6 Astra with and without
+PC2 on 27 matched AutomationBench runs (nine tasks) and a three-task follow-up. Its figures are drawn in
+`components/automationbench-figures.tsx` from `lib/automationbench-results.json`, which was extracted
+from `qualification/astra-frozen-evaluation-001-resumed-01/paired-comparison.json` in the
+AutomationBench gate-study checkout. The tenth evaluated task, Guest Post Outreach, is set aside
+(its instructions conflict) and listed under `excluded` in the JSON. Figure 2 reports per-task
+shares: a task counts when at least two of its three runs had the outcome (`perTask`). Case-study
+quotes come from the corresponding run journals.
 
 The figures and aggregate data are generated in the local benchmark checkout by
 `python -m pc2_evaluation.plot_operational_report --website <this-website-directory>`.

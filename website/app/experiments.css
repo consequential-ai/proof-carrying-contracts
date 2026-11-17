@@ -57,3 +57,24 @@
  .experiment-downloads{padding:25px 20px}
 }
 @media(max-width:440px){html:not([data-enhanced]){--header-height:184px}}
+
+/* Evidence index: one card per study */
+.evidence-list{padding-top:8px}
+.evidence-card{padding:38px 0 42px;border-top:1px solid var(--rule)}
+.evidence-card:first-of-type{border-top:0;padding-top:20px}
+.evidence-card:last-child{border-bottom:1px solid var(--rule)}
+.evidence-card h3{margin:6px 0 14px;font-size:clamp(26px,3.2vw,34px);line-height:1.2}
+.evidence-card h3 a{text-decoration:none;color:inherit}
+.evidence-card h3 a:hover{text-decoration:underline;text-underline-offset:5px}
+.evidence-card>p{max-width:72ch;font-size:17px}
+.evidence-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 40px;margin:26px 0 0;padding:24px 0;border-block:1px solid var(--rule)}
+.evidence-stats dt{font-size:16px;line-height:1.45;margin-bottom:12px}
+.evidence-stats dd{margin:0;display:flex;gap:30px;flex-wrap:wrap}
+.evidence-value{display:flex;flex-direction:column;gap:6px}
+.evidence-value b{font-weight:400;font-size:44px;line-height:1.05;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.evidence-value small{display:flex;align-items:center;gap:7px;font-size:14px;color:var(--muted)}
+.evidence-value small::before{content:"";width:11px;height:11px;border-radius:2px;flex:none}
+.evidence-value.base small::before{background:#bb593b}
+.evidence-value.pc2 small::before{background:#246b8a}
+.evidence-scope{font-size:14px!important;color:var(--muted);margin:12px 0 22px}
+@media(max-width:600px){.evidence-stats{grid-template-columns:1fr}.evidence-value b{font-size:38px}}

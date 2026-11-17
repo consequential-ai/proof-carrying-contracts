@@ -7,9 +7,9 @@ import re
 from urllib.parse import urljoin, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGE = ROOT / 'outputs/github-pages/data/experiments.html'
+PAGE = ROOT / 'outputs/github-pages/data/experiments/payments-and-cargo.html'
 OUTPUT = ROOT / 'outputs/pc2-experiments.html'
-PUBLIC_PAGE = 'https://consequential-ai.github.io/proof-carrying-contracts/data/experiments.html'
+PUBLIC_PAGE = 'https://consequential-ai.github.io/proof-carrying-contracts/data/experiments/payments-and-cargo.html'
 
 
 def embedded(path):
@@ -37,7 +37,7 @@ def tag(match):
     if parsed.scheme or parsed.netloc or not parsed.path:
         return value
     if parsed.path.endswith('.html'):
-        replacement = '#top' if parsed.path == 'experiments.html' else urljoin(PUBLIC_PAGE, url)
+        replacement = '#top' if parsed.path == 'payments-and-cargo.html' else urljoin(PUBLIC_PAGE, url)
     else:
         local = PAGE.parent / parsed.path
         replacement = embedded(local)
